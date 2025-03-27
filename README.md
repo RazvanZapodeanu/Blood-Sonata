@@ -1,57 +1,39 @@
-# 🌌 Aether
+# 🪐Aether
 
-**Aether** is a particle simulation project built with C++ and SFML, focusing on clarity, modularity, and clean object-oriented design.
-
-The simulation currently supports particle creation, visual rendering, and basic interaction. The goal is to offer a clear, educational system that can be gradually extended with more advanced mechanics.
-
----
-
-## 📦 Features
-
-- Particle rendering with color and position control
-- Real-time particle generation via keyboard input
-- Basic collision detection and response
-- Configurable simulation parameters (e.g., delta time, FPS limit)
-- Sound effects and custom background support
+**Aether** is a simple particle simulation built with C++ and SFML, as part of a university assignment.  
+It focuses on clean object-oriented structure and serves as a foundation for future features.
 
 ---
 
-## 🔧 Technologies
+## ✨ Features
 
-- **C++17**
-- **SFML 3+**
-- CMake build system
-- Object-Oriented Design Principles
+- Particle rendering with basic color and movement
+- Real-time particle spawning from keyboard
+- Basic reset, pause, and quit functionality
 
 ---
 
-## 🚧 Work in Progress
+## 🛠 Technologies
 
-Aether is currently in an early functional state. Planned future additions include:
-
-- Gravitational force between particles
-- Two distinct simulation modes:
-  - `space`: particles attract each other
-  - `terra`: particles bounce and collide with ground
-- A real-time control panel for tuning physics (gravity, elasticity, simulation speed)
-- Configuration file system (e.g., `config.json`)
+- C++23
+- SFML 3 (via CMake)
+- Object-oriented design
 
 ---
 
 ## 🎮 Controls
 
-| Key        | Action                        |
-|------------|-------------------------------|
-| `Space`    | Spawn a new particle          |
-| `P`        | Pause/resume simulation       |
-| `R`        | Reset simulation              |
-| `ESC`      | Exit application              |
+| Key        | Action           |
+|------------|------------------|
+| `Space`    | Spawn particle   |
+| `P`        | Pause / resume   |
+| `R`        | Reset simulation |
+| `ESC`      | Exit             |
 
 ---
 
-## 📌 Notes
+## 🚧 Status
 
-This project is a university assignment developed with clarity and extensibility in mind. While the core logic is simple, the architecture is designed to support future growth.
+ **Work in progress** — core functionality is working, but the physics system is still being improved for better realism and stability at high particle counts.
 
----
 
