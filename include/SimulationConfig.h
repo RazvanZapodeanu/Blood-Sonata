@@ -3,7 +3,7 @@
 
 struct SimulationConfig {
 
-    static inline float gravity = 98.1f;
+    static inline float gravity = 0.0f;
     static inline float elasticity = 0.75f;
     static inline float deltaTime = 0.1f;
     static inline int targetFPS = 60;

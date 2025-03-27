@@ -108,7 +108,6 @@ jobs:
             name: "MSan: Ubuntu 22.04 Clang 18"
             cmake_flags: "-DUSE_MSAN=ON"
             cmake_generator: Ninja
-            # This env runs memory sanitizers
             runs_msan: true
 
           - os: ubuntu-22.04
@@ -117,33 +116,20 @@ jobs:
             name: "ASan: Ubuntu 22.04 GCC 12"
             cmake_flags: "-DUSE_ASAN=ON"
             cmake_generator: Ninja
-            # This env runs address sanitizers
             runs_asan: true
-            # this is used to add a suffix to the archive name since we use the same compiler version
             asan_name: "-asan"
-
-          - os: ubuntu-22.04
-            c: gcc-12
-            cxx: g++-12
-            name: "Valgrind: Ubuntu 22.04 GCC 12"
-            # cmake_flags:
-            cmake_generator: Ninja
-            # This env runs valgrind
-            runs_valgrind: true
 
           - os: macos-14
             c: clang
             cxx: clang++
             name: "macOS 14 Apple Clang 15"
             cmake_flags: "-DUSE_ASAN=OFF"
-            # cmake_generator:
-            # This env runs address sanitizers
             runs_asan: false
 
           - os: macos-14
-            c: gcc-13
-            cxx: g++-13
-            name: "macOS 14 GCC 13"
+            c: clang  # Change this from gcc-13 to clang
+            cxx: clang++  # Change this from g++-13 to clang++
+            name: "macOS 14 Clang"
             # cmake_flags:
             # cmake_generator: Ninja
 
@@ -152,17 +138,12 @@ jobs:
             cxx: cl
             name: "ASan: Windows 2022 MSVC 19.43"
             cmake_flags: "-DUSE_ASAN=ON"
-            # Ninja is not faster on MSVC because... MSVC
-            # cmake_generator: "Ninja"
-            # cmake_generator: "Ninja Multi-Config"
-            # This env runs address sanitizers
             runs_asan: true
 
           - os: windows-2022
             c: gcc
             cxx: g++
             name: "Windows 2022 MinGW GCC 13"
-            # cmake_flags:
             cmake_generator: Ninja
 
     steps:

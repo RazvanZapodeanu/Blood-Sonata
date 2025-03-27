@@ -1,6 +1,10 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
+#if defined(__GNUC__) || defined(__clang__)
 #include <bits/algorithmfwd.h>
+#else
+#include <algorithm>
+#endif
 
 #include "Vector2D.h"
 #include "SimulationConfig.h"
@@ -81,11 +85,10 @@ public:
         }
         else velocity.setX(velocity.getX()*SimulationConfig::AirFriction);
 
+        velocity.setY(velocity.getY()*SimulationConfig::AirFriction);
 
-
-                position.setX(std::clamp(getPosition().getX(), getRadius(), SimulationConfig::windowWidth - getRadius()));
-                position.setY(std::clamp(getPosition().getY(), getRadius(), SimulationConfig::windowHeight - getRadius()));
-
+        position.setX(std::clamp(getPosition().getX(), getRadius(), SimulationConfig::windowWidth - getRadius()));
+        position.setY(std::clamp(getPosition().getY(), getRadius(), SimulationConfig::windowHeight - getRadius()));
 
         if (position.getY()!=0)
             velocity.setY(velocity.getY()-SimulationConfig::gravity*deltaTime);
