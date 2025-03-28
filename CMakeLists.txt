@@ -44,27 +44,25 @@ FetchContent_Declare(SFML
         GIT_REPOSITORY https://github.com/SFML/SFML.git
         GIT_TAG 3.0.0
         GIT_SHALLOW ON
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
         EXCLUDE_FROM_ALL
         SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
+FetchContent_Declare(
+        imgui
+        URL "https://github.com/ocornut/imgui/archive/v1.91.9b.zip"
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+
+FetchContent_Declare(
+        imgui-sfml
+        GIT_REPOSITORY https://github.com/SFML/imgui-sfml.git
+        GIT_TAG 5e8f8fb857c8f3cff1096bf3e4402c64e3bcf6af
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
 
 
-#FetchContent_Declare(dear_imgui
-#        GIT_REPOSITORY https://github.com/SFML/SFML.git
-#        GIT_TAG 3.0.0
-#        GIT_SHALLOW ON
-#        EXCLUDE_FROM_ALL
-#        SYSTEM)
-#FetchContent_MakeAvailable(dear_imgui)
-#
-#FetchContent_Declare(imgui_sfml
-#        GIT_REPOSITORY https://github.com/SFML/SFML.git
-#        GIT_TAG 3.0.0
-#        GIT_SHALLOW ON
-#        EXCLUDE_FROM_ALL
-#        SYSTEM)
-#FetchContent_MakeAvailable(imgui_sfml)
 
 ###############################################################################
 
@@ -110,7 +108,10 @@ target_link_libraries(${MAIN_EXECUTABLE_NAME}
         SFML::System
         SFML::Audio
 )
-
+target_link_libraries(${MAIN_EXECUTABLE_NAME}
+        PRIVATE
+        ImGui-SFML::ImGui-SFML
+)
 add_custom_command(TARGET ${MAIN_EXECUTABLE_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:SFML::Graphics>
@@ -118,6 +119,17 @@ add_custom_command(TARGET ${MAIN_EXECUTABLE_NAME} POST_BUILD
         $<TARGET_FILE:SFML::System>
         $<TARGET_FILE:SFML::Audio>
         $<TARGET_FILE_DIR:${MAIN_EXECUTABLE_NAME}> )
+
+
+# Dear ImGui
+FetchContent_MakeAvailable(imgui)
+
+# ImGui-SFML
+set(IMGUI_DIR ${imgui_SOURCE_DIR})
+option(IMGUI_SFML_FIND_SFML "Use find_package to find SFML" OFF)
+option(IMGUI_SFML_IMGUI_DEMO "Build imgui_demo.cpp" ON)
+
+FetchContent_MakeAvailable(imgui-sfml)
 ###############################################################################
 
 # copy binaries to "bin" folder; these are uploaded as artifacts on each release

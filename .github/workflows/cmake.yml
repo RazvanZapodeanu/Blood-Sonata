@@ -54,6 +54,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Install X11 + OpenGL (Linux only)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libxrandr-dev \
+            libxcursor-dev \
+            libxi-dev \
+            libgl1-mesa-dev
+      
+
       - name: Run clang-tidy
         uses: ./.github/actions/clang-tidy
 
@@ -124,8 +135,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install X11 libraries
-        run: sudo apt-get update && sudo apt-get install -y libxrandr-dev libxcursor-dev libxi-dev
+      - name: Install X11 + OpenGL (Linux only)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libxrandr-dev \
+            libxcursor-dev \
+            libxi-dev \
+            libgl1-mesa-dev
 
       - name: Set timestamp, zip name, repo visibility
         env:

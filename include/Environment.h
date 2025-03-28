@@ -51,8 +51,8 @@ public:
         double randomRadius = rand() % 11 + 5;
         Vector2D randomPosition;
         do{
-            randomPosition.setX(std::round(static_cast<float>(rand())/RAND_MAX*800)*100/100.0f);
-            randomPosition.setY(std::round(static_cast<float>(rand())/RAND_MAX*600)*100/100.0f);
+            randomPosition.setX(std::round(static_cast<float>(rand())/RAND_MAX*SimulationConfig::windowWidth)*100/100.0f);
+            randomPosition.setY(std::round(static_cast<float>(rand())/RAND_MAX*SimulationConfig::windowHeight)*100/100.0f);
         }while (isOverlapping(randomPosition,randomRadius));
         Vector2D randomVelocity(rand() % 200 - 100, rand() % 200 - 100);
 
@@ -72,7 +72,7 @@ public:
         return false;
     }
     void update(double dt) {
-
+        applyMutualGravity();
         for (auto& p : particles) {
             p->update(dt);
 
@@ -126,6 +126,49 @@ public:
             }
         }
     }
+    void applyMutualGravity() {
+        const float cutoff = SimulationConfig::GravityRadius;
+        const float cutoffSq = cutoff * cutoff;
+
+        for (size_t i = 0; i < particles.size(); ++i) {
+            for (size_t j = i + 1; j < particles.size(); ++j) {
+
+
+                double dx = particles[j]->getPosition().getX() - particles[i]->getPosition().getX();
+                double dy = particles[j]->getPosition().getY() - particles[i]->getPosition().getY();
+
+                double distSq = dx * dx + dy * dy;
+                if (distSq > cutoffSq)
+                    continue;
+
+                double dist = std::sqrt(distSq);
+                double dirX = dx / dist;
+                double dirY = dy / dist;
+
+                double mA = particles[i]->getMass();
+                double mB = particles[j]->getMass();
+
+                double forceMag = SimulationConfig::particleGravity * (mA * mB) / distSq;
+
+                double fx = forceMag * dirX;
+                double fy = forceMag * dirY;
+
+
+                double dt = SimulationConfig::deltaTime;
+
+                particles[i]->setVelocity(Vector2D(
+                    particles[i]->getVelocity().getX() + fx / mA * dt,
+                    particles[i]->getVelocity().getY() + fy / mA * dt
+                ));
+
+                particles[j]->setVelocity(Vector2D(
+                    particles[j]->getVelocity().getX() - fx / mB * dt,
+                    particles[j]->getVelocity().getY() - fy / mB * dt
+                ));
+            }
+        }
+    }
+
     void clearParticles() {
         particles.clear();
     }

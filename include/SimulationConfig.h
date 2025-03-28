@@ -9,10 +9,10 @@ struct SimulationConfig {
     static inline int targetFPS = 60;
     static inline float GroundFriction = 0.9;
     static inline float AirFriction = 0.99;
-    static inline double stabilityThreshold = 0.1;
-
-    static inline int windowWidth = 800;
-    static inline int windowHeight = 600;
+    static inline float particleGravity = 100.0;
+    static inline float GravityRadius = 20.0;
+    static inline int windowWidth = 1920;
+    static inline int windowHeight = 960;
 
     static inline bool paused = false;
 

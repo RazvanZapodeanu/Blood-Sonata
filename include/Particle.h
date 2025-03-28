@@ -1,9 +1,10 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
+
 #if defined(__GNUC__) || defined(__clang__)
-#include <bits/algorithmfwd.h>
+    #include <bits/algorithmfwd.h>
 #else
-#include <algorithm>
+    #include <algorithm>
 #endif
 
 #include "Vector2D.h"

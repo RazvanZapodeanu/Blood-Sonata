@@ -32,7 +32,9 @@ public:
 
     void setTimeStep(double newTimeStep) { timeStep = newTimeStep; }
 
-
+    void setDetlaTime(float deltatime) {
+        timeStep=deltatime;
+    }
     void addParticle(const Particle& particle) {
         environment.addParticle(particle);
     }
@@ -49,7 +51,14 @@ public:
         }
     }
 
-    int loadFileData(const std::string& filename = "../Data/InputData.txt") {
+    int loadFileData(int index = -1) {
+        std::string filename;
+        if (index == -1) {
+            filename = "../Data/InputData.txt";
+        } else {
+            filename = "../Data/InputData" + std::to_string(index) + ".txt";
+        }
+
         std::ifstream file(filename);
         if (file.is_open()) {
             std::string name;
@@ -65,9 +74,9 @@ public:
             return 0;
         }
     }
-    void reset() {
+    void reset(const int fileNumber) {
         environment.clearParticles();
-        loadFileData();
+        loadFileData(fileNumber);
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Simulation& sim) {
