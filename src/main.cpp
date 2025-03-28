@@ -11,7 +11,6 @@ int main() {
     Simulation sim(SimulationConfig::windowWidth, SimulationConfig::windowHeight, SimulationConfig::deltaTime);
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(SimulationConfig::windowWidth, SimulationConfig::windowHeight)),"Particles");
     window.setFramerateLimit(SimulationConfig::targetFPS);
-
     if (!ImGui::SFML::Init(window)) {
         std::cerr << "ImGui::SFML::Init failed!\n";
         return -1;

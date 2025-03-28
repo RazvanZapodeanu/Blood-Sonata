@@ -5,32 +5,17 @@ It focuses on clean object-oriented structure and serves as a foundation for fut
 
 ---
 
-## ✨ Features
-
-- Particle rendering with basic color and movement
-- Real-time particle spawning from keyboard
-- Basic reset, pause, and quit functionality
-
----
 
 ## 🛠 Technologies
 
 - C++23
-- SFML 3 (via CMake)
-- Object-oriented design
+- SFML 3
+- ImGui-SFML
+- OOP architecture (modular simulation core)
+- CMake (with FetchContent for automatic dependency management)
 
 ---
 
-## 🎮 Controls
-
-| Key        | Action           |
-|------------|------------------|
-| `Space`    | Spawn particle   |
-| `P`        | Pause / resume   |
-| `R`        | Reset simulation |
-| `ESC`      | Exit             |
-
----
 
 ## 🚧 Status
 

@@ -71,8 +71,8 @@ public:
         }
         return false;
     }
-    void update(double dt) {
-        applyMutualGravity();
+    void update(double const dt) {
+        pullGravity(dt);
         for (auto& p : particles) {
             p->update(dt);
 
@@ -126,46 +126,46 @@ public:
             }
         }
     }
-    void applyMutualGravity() {
-        const float cutoff = SimulationConfig::GravityRadius;
-        const float cutoffSq = cutoff * cutoff;
+    void pullGravity(const double dt) {
+        const double G = SimulationConfig::particleGravity;
+        const double softening = 1.0;
+
+        std::vector<std::pair<double, double>> acc(particles.size(), {0.0, 0.0});
 
         for (size_t i = 0; i < particles.size(); ++i) {
             for (size_t j = i + 1; j < particles.size(); ++j) {
-
+                auto& a = particles[i];
+                auto& b = particles[j];
 
                 double dx = particles[j]->getPosition().getX() - particles[i]->getPosition().getX();
                 double dy = particles[j]->getPosition().getY() - particles[i]->getPosition().getY();
 
-                double distSq = dx * dx + dy * dy;
-                if (distSq > cutoffSq)
-                    continue;
-
+                double distSq = dx * dx + dy * dy + softening * softening;
                 double dist = std::sqrt(distSq);
-                double dirX = dx / dist;
-                double dirY = dy / dist;
 
-                double mA = particles[i]->getMass();
-                double mB = particles[j]->getMass();
+                double forceMag =std::min( G * particles[i]->getMass() * particles[j]->getMass() / (distSq * dist),5000.0);
 
-                double forceMag = SimulationConfig::particleGravity * (mA * mB) / distSq;
+                double fx = forceMag * dx / dist;
+                double fy = forceMag * dy / dist;
 
-                double fx = forceMag * dirX;
-                double fy = forceMag * dirY;
+                acc[i].first  += fx / particles[i]->getMass();
+                acc[i].second += fy / particles[i]->getMass();
 
-
-                double dt = SimulationConfig::deltaTime;
-
-                particles[i]->setVelocity(Vector2D(
-                    particles[i]->getVelocity().getX() + fx / mA * dt,
-                    particles[i]->getVelocity().getY() + fy / mA * dt
-                ));
-
-                particles[j]->setVelocity(Vector2D(
-                    particles[j]->getVelocity().getX() - fx / mB * dt,
-                    particles[j]->getVelocity().getY() - fy / mB * dt
-                ));
+                acc[j].first  -= fx / particles[j]->getMass();
+                acc[j].second -= fy / particles[j]->getMass();
             }
+        }
+
+        for (size_t i = 0; i < particles.size(); ++i) {
+            auto vel = particles[i]->getVelocity();
+            double vx = vel.getX() + acc[i].first * dt;
+            double vy = vel.getY() + acc[i].second * dt;
+
+            double px = particles[i]->getPosition().getX() + vx * dt;
+            double py = particles[i]->getPosition().getY() + vy * dt;
+
+            particles[i]->setVelocity(Vector2D(vx, vy));
+            particles[i]->setPosition(Vector2D(px, py));
         }
     }
 
