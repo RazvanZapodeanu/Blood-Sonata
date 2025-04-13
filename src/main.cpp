@@ -7,7 +7,7 @@
 
 int main() {
     ResourceManager::load();
-    const int FileNumberToLoad=1;
+    constexpr int FileNumberToLoad=1;
     Simulation sim(SimulationConfig::windowWidth, SimulationConfig::windowHeight, SimulationConfig::deltaTime);
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(SimulationConfig::windowWidth, SimulationConfig::windowHeight)),"Particles");
     window.setFramerateLimit(SimulationConfig::targetFPS);

@@ -154,7 +154,7 @@ public:
                 const double fx = forceMag * dx / dist;
                 const double fy = forceMag * dy / dist;
 
-                const double totalMass=particles[i]->getMass()+particles[j]->getMass();
+                //const double totalMass=particles[i]->getMass()+particles[j]->getMass();
 
                 acc[i].first  += fx / particles[i]->getMass();
                 acc[i].second += fy / particles[i]->getMass();
