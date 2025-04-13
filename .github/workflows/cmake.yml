@@ -62,39 +62,20 @@ jobs:
             build-essential \
             xorg-dev \
             libsfml-dev \
-            # X11 core packages
             libx11-dev \
             libxrandr-dev \
             libxcursor-dev \
             libxi-dev \
             libxinerama-dev \
             libxext-dev \
-            # XCB packages
-            libxcb1-dev \
-            libxcb-render0-dev \
-            libxcb-render-util0-dev \
-            libxcb-xkb-dev \
-            libxcb-icccm4-dev \
-            libxcb-image0-dev \
-            libxcb-keysyms1-dev \
-            libxcb-randr0-dev \
-            libxcb-shape0-dev \
-            libxcb-sync-dev \
-            libxcb-xfixes0-dev \
-            libxcb-xinerama0-dev \
-            libxcb-util0-dev \
-            # OpenGL packages
             libgl1-mesa-dev \
             libglu1-mesa-dev \
-            # Audio packages
             libasound2-dev \
             libpulse-dev \
             libvorbis-dev \
             libogg-dev \
             libflac-dev \
-            # UDev
             libudev-dev \
-            # Virtual framebuffer
             xvfb
 
       - name: Setup Xvfb
@@ -182,39 +163,20 @@ jobs:
             build-essential \
             xorg-dev \
             libsfml-dev \
-            # X11 core packages
             libx11-dev \
             libxrandr-dev \
             libxcursor-dev \
             libxi-dev \
             libxinerama-dev \
             libxext-dev \
-            # XCB packages
-            libxcb1-dev \
-            libxcb-render0-dev \
-            libxcb-render-util0-dev \
-            libxcb-xkb-dev \
-            libxcb-icccm4-dev \
-            libxcb-image0-dev \
-            libxcb-keysyms1-dev \
-            libxcb-randr0-dev \
-            libxcb-shape0-dev \
-            libxcb-sync-dev \
-            libxcb-xfixes0-dev \
-            libxcb-xinerama0-dev \
-            libxcb-util0-dev \
-            # OpenGL packages
             libgl1-mesa-dev \
             libglu1-mesa-dev \
-            # Audio packages
             libasound2-dev \
             libpulse-dev \
             libvorbis-dev \
             libogg-dev \
             libflac-dev \
-            # UDev
             libudev-dev \
-            # Virtual framebuffer
             xvfb
 
       - name: Setup Xvfb
@@ -262,13 +224,12 @@ jobs:
       - name: Process artifacts
         uses: ./.github/actions/process-artifacts
 
-      - name: Upload Artifacts
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.ZIP_NAME }}_${{ env.TIMESTAMP }}_${{ github.run_id }}
-          include-hidden-files: true
-          path: ${{ env.ZIP_NAME }}
-          retention-days: 30
+          name: Aether-${{ github.run_id }}
+          path: |
+              {{ github.workspace }}/build/${{ matrix.build_type }}/${{ matrix.compiler }}/${{ matrix.os }}/${{ matrix.arch }}/${{ env.EXECUTABLE_NAME }}
 
       - name: Runtime checks
         uses: ./.github/actions/runtime-checks

@@ -29,7 +29,7 @@ function(set_compiler_flags)
         if(MSVC)
             target_compile_options(${TARGET_NAME} PRIVATE /W4 /permissive- /wd4244 /wd4267 /wd4996 /external:anglebrackets /external:W0 /utf-8 /MP)
         else()
-            target_compile_options(${TARGET_NAME} PRIVATE -Wall -pedantic)
+            target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -Werror=conversion -Werror=sign-conversion)
         endif()
 
         ###############################################################################
