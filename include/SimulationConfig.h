@@ -7,13 +7,13 @@ struct SimulationConfig {
     static inline float elasticity = 0.75f;
     static inline float deltaTime = 0.1f;
     static inline int targetFPS = 60;
-    static inline float GroundFriction = 0.9;
-    static inline float AirFriction = 0.99;
-    static inline float particleGravity = 100.0;
-    static inline float GravityRadius = 20.0;
+    static inline float GroundFriction = 0.9f;
+    static inline float AirFriction = 0.99f;
+    static inline float particleGravity = 100.0f;
+    static inline float GravityRadius = 20.0f;
     static inline int windowWidth = 1920;
     static inline int windowHeight = 760;
-    static inline float particleSurfaceFriction = 0.92;
+    static inline float particleSurfaceFriction = 0.92f;
 
     static inline bool paused = false;
 

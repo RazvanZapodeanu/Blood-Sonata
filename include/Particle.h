@@ -66,14 +66,14 @@ public:
     [[nodiscard]] int getGreen() const { return green;}
     [[nodiscard]] int getBlue() const { return blue;}
 
-    void setName(const std::string& name){this->name=name;}
-    void setMass(double mass){this->mass=mass;}
-    void setRadius(double radius){this->radius=radius;}
-    void setPosition(const Vector2D& position) {
-        this->position=position;
+    void setName(const std::string& newName){name=newName;}
+    void setMass(double newMass){mass=newMass;}
+    void setRadius(double newRadius){radius=newRadius;}
+    void setPosition(const Vector2D& newPosition) {
+        position=newPosition;
     }
-    void setVelocity(const Vector2D& velocity) {
-        this->velocity=velocity;
+    void setVelocity(const Vector2D& newVelocity) {
+        velocity=newVelocity;
     }
 
     virtual void update(double deltaTime) {

@@ -145,7 +145,8 @@ jobs:
             libxrandr-dev \
             libxcursor-dev \
             libxi-dev \
-            libgl1-mesa-dev
+            libgl1-mesa-dev \
+            libudev-dev
 
       - name: Set timestamp, zip name, repo visibility
         env:
