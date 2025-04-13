@@ -62,18 +62,15 @@ jobs:
             build-essential \
             xorg-dev \
             libsfml-dev \
+            # X11 core packages
             libx11-dev \
             libxrandr-dev \
             libxcursor-dev \
             libxi-dev \
             libxinerama-dev \
             libxext-dev \
-            libgl1-mesa-dev \
-            libudev-dev \
-            libvorbis-dev \
-            libogg-dev \
-            libflac-dev \
-            libx11-xcb-dev \
+            # XCB packages
+            libxcb1-dev \
             libxcb-render0-dev \
             libxcb-render-util0-dev \
             libxcb-xkb-dev \
@@ -86,30 +83,20 @@ jobs:
             libxcb-xfixes0-dev \
             libxcb-xinerama0-dev \
             libxcb-util0-dev \
-            libxcb-ewmh-dev \
-            libxcb-icccm4-dev \
-            libxcb-image0-dev \
-            libxcb-keysyms1-dev \
-            libxcb-randr0-dev \
-            libxcb-shape0-dev \
-            libxcb-sync-dev \
-            libxcb-xfixes0-dev \
-            libxcb-xinerama0-dev \
-            libxcb-xkb-dev \
-            libxcb-xrm-dev \
-            libxcb-xtest0-dev \
-            libxcb-xv-dev \
-            libxcb-xvmc-dev \
-            libxcb-dri2-0-dev \
-            libxcb-dri3-dev \
-            libxcb-glx0-dev \
-            libxcb-present-dev \
-            libxcb-sync-dev \
-            libxcb-xf86dri-dev \
-            libxcb-xinput-dev \
+            # OpenGL packages
+            libgl1-mesa-dev \
+            libglu1-mesa-dev \
+            # Audio packages
             libasound2-dev \
             libpulse-dev \
+            libvorbis-dev \
+            libogg-dev \
+            libflac-dev \
+            # UDev
+            libudev-dev \
+            # Virtual framebuffer
             xvfb
+
       - name: Setup Xvfb
         if: runner.os == 'Linux'
         run: |
@@ -195,18 +182,15 @@ jobs:
             build-essential \
             xorg-dev \
             libsfml-dev \
+            # X11 core packages
             libx11-dev \
             libxrandr-dev \
             libxcursor-dev \
             libxi-dev \
             libxinerama-dev \
             libxext-dev \
-            libgl1-mesa-dev \
-            libudev-dev \
-            libvorbis-dev \
-            libogg-dev \
-            libflac-dev \
-            libx11-xcb-dev \
+            # XCB packages
+            libxcb1-dev \
             libxcb-render0-dev \
             libxcb-render-util0-dev \
             libxcb-xkb-dev \
@@ -219,29 +203,18 @@ jobs:
             libxcb-xfixes0-dev \
             libxcb-xinerama0-dev \
             libxcb-util0-dev \
-            libxcb-ewmh-dev \
-            libxcb-icccm4-dev \
-            libxcb-image0-dev \
-            libxcb-keysyms1-dev \
-            libxcb-randr0-dev \
-            libxcb-shape0-dev \
-            libxcb-sync-dev \
-            libxcb-xfixes0-dev \
-            libxcb-xinerama0-dev \
-            libxcb-xkb-dev \
-            libxcb-xrm-dev \
-            libxcb-xtest0-dev \
-            libxcb-xv-dev \
-            libxcb-xvmc-dev \
-            libxcb-dri2-0-dev \
-            libxcb-dri3-dev \
-            libxcb-glx0-dev \
-            libxcb-present-dev \
-            libxcb-sync-dev \
-            libxcb-xf86dri-dev \
-            libxcb-xinput-dev \
+            # OpenGL packages
+            libgl1-mesa-dev \
+            libglu1-mesa-dev \
+            # Audio packages
             libasound2-dev \
             libpulse-dev \
+            libvorbis-dev \
+            libogg-dev \
+            libflac-dev \
+            # UDev
+            libudev-dev \
+            # Virtual framebuffer
             xvfb
 
       - name: Setup Xvfb
