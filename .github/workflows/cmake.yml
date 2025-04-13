@@ -59,16 +59,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            build-essential \
             xorg-dev \
-            libx11-dev \
-            libxrandr-dev \
-            libxcursor-dev \
-            libxi-dev \
-            libgl1-mesa-dev \
-            libudev-dev \
-            libvorbis-dev \
-            libogg-dev \
-            libflac-dev
+            libsfml-dev
         
       
 
@@ -147,16 +140,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            build-essential \
             xorg-dev \
-            libx11-dev \
-            libxrandr-dev \
-            libxcursor-dev \
-            libxi-dev \
-            libgl1-mesa-dev \
-            libudev-dev \
-            libvorbis-dev \
-            libogg-dev \
-            libflac-dev
+            libsfml-dev
 
       - name: Set timestamp, zip name, repo visibility
         env:
