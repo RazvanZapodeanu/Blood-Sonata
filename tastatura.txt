@@ -1,5 +1,3 @@
-# Format: Name (string), Mass (double), Radius (double), PosX (double), PosY (double), VelX (double), VelY (double), Red (int), Green (int), Blue (int)
-# Example:
 Sun  1000  50  400  300  0.0 0.0  255 215 0
 Mercury  0.06  5  480  300  0.0 0.0  169 169 169
 Venus  0.82  10  450.111  409.036  0.0 0.0  218 165 32

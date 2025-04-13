@@ -41,7 +41,8 @@ public:
 
 
     void step() {
-        environment.update(timeStep);
+        for (int i =0 ; i < 2 ; i++)
+            environment.update(timeStep/2);
         time += timeStep;
     }
 

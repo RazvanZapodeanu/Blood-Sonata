@@ -66,12 +66,13 @@ int main() {
         ImGui::Begin("Simulation Controls");
 
         ImGui::SliderFloat("Gravity", &SimulationConfig::gravity, -50.0f, 50.0f);
-        ImGui::SliderFloat("Particle Gravity", &SimulationConfig::particleGravity, 0.0f, 1000.0f);
+        ImGui::SliderFloat("Particle Gravity", &SimulationConfig::particleGravity, 0.0f, 10000.0f);
         ImGui::SliderFloat("Gravity Radius", &SimulationConfig::GravityRadius,0.0f,2500.0f);
         ImGui::SliderFloat("Elasticity", &SimulationConfig::elasticity, 0.0f, 1.5f);
         if (ImGui::SliderFloat("Delta Time", &SimulationConfig::deltaTime, 0.001f, 1.0f))
             {sim.setDetlaTime(SimulationConfig::deltaTime);}
         ImGui::SliderInt("Target FPS", &SimulationConfig::targetFPS, 1, 2000);
+        ImGui::SliderFloat("Particle Friction", &SimulationConfig::particleSurfaceFriction, 0, 2);
         ImGui::SliderFloat("Ground Friction", &SimulationConfig::GroundFriction, 0.0f, 1.0f);
         ImGui::SliderFloat("Air Friction", &SimulationConfig::AirFriction, 0.0f, 1.0f);
 

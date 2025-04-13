@@ -72,36 +72,7 @@ public:
         return false;
     }
     void update(double const dt) {
-        pullGravity(dt);
-        for (auto& p : particles) {
-            p->update(dt);
-
-
-            Vector2D pos = p->getPosition();
-            Vector2D vel = p->getVelocity();
-            const double r = p->getRadius();
-
-            if (pos.getX() < r) {
-                p->setPosition(Vector2D(r, pos.getY()));
-                p->setVelocity(Vector2D(-vel.getX()*SimulationConfig::elasticity, vel.getY()));
-            }
-            if (pos.getX() > width - r) {
-                p->setPosition(Vector2D(width - r, pos.getY()));
-                p->setVelocity(Vector2D(-vel.getX()*SimulationConfig::elasticity, vel.getY()));
-            }
-
-            if (pos.getY() < r) {
-                p->setPosition(Vector2D(pos.getX(), r));
-                p->setVelocity(Vector2D(vel.getX(), -vel.getY()*SimulationConfig::elasticity));
-            }
-            if (pos.getY() > height - r) {
-                p->setPosition(Vector2D(pos.getX(), height - r));
-                p->setVelocity(Vector2D(vel.getX(), -vel.getY()*SimulationConfig::elasticity));
-            }
-
-        }
-
-
+        auto accelerations=pullGravity();
         for (size_t i = 0; i < particles.size(); ++i) {
             for (size_t j = i + 1; j < particles.size(); ++j) {
                 if (particles[i]->collidesWith(*particles[j])) {
@@ -125,28 +96,65 @@ public:
                 }
             }
         }
+        for (size_t i = 0; i < particles.size(); ++i){
+            auto& p = particles[i];
+
+
+
+            Vector2D pos = p->getPosition();
+            Vector2D vel = p->getVelocity();
+            vel.setX(vel.getX() + accelerations[i].first * dt);
+            vel.setY(vel.getY() + accelerations[i].second * dt);
+            p->setVelocity(vel);
+            p->update(dt);
+            const double r = p->getRadius();
+
+            if (pos.getX() < r) {
+                p->setPosition(Vector2D(r, pos.getY()));
+                p->setVelocity(Vector2D(-vel.getX()*SimulationConfig::elasticity, vel.getY()*SimulationConfig::elasticity));  // Aplicăm elasticitate și pe y
+            }
+            if (pos.getX() > width - r) {
+                p->setPosition(Vector2D(width - r, pos.getY()));
+                p->setVelocity(Vector2D(-vel.getX()*SimulationConfig::elasticity, vel.getY()));
+            }
+
+            if (pos.getY() < r) {
+                p->setPosition(Vector2D(pos.getX(), r));
+                p->setVelocity(Vector2D(vel.getX(), -vel.getY()*SimulationConfig::elasticity));
+            }
+            if (pos.getY() > height - r) {
+                p->setPosition(Vector2D(pos.getX(), height - r));
+                p->setVelocity(Vector2D(vel.getX(), -vel.getY()*SimulationConfig::elasticity));
+            }
+
+
+
+        }
+
+
+
     }
-    void pullGravity(const double dt) {
+    std::vector<std::pair<double, double>> pullGravity() {
         const double G = SimulationConfig::particleGravity;
-        const double softening = 1.0;
+        const double softening = 10.0;
 
         std::vector<std::pair<double, double>> acc(particles.size(), {0.0, 0.0});
 
         for (size_t i = 0; i < particles.size(); ++i) {
             for (size_t j = i + 1; j < particles.size(); ++j) {
-                auto& a = particles[i];
-                auto& b = particles[j];
 
-                double dx = particles[j]->getPosition().getX() - particles[i]->getPosition().getX();
-                double dy = particles[j]->getPosition().getY() - particles[i]->getPosition().getY();
+                const double dx = particles[j]->getPosition().getX() - particles[i]->getPosition().getX();
+                const double dy = particles[j]->getPosition().getY() - particles[i]->getPosition().getY();
 
-                double distSq = dx * dx + dy * dy + softening * softening;
-                double dist = std::sqrt(distSq);
+                const double distSq = dx * dx + dy * dy + softening * softening;
+                const double dist = std::sqrt(distSq);
 
-                double forceMag =std::min( G * particles[i]->getMass() * particles[j]->getMass() / (distSq * dist),5000.0);
+                const double forceMag =std::min( G * particles[i]->getMass() * particles[j]->getMass() / distSq,1000.0);
 
-                double fx = forceMag * dx / dist;
-                double fy = forceMag * dy / dist;
+                const double fx = forceMag * dx / dist;
+                const double fy = forceMag * dy / dist;
+
+                const double totalMass=particles[i]->getMass()+particles[j]->getMass();
 
                 acc[i].first  += fx / particles[i]->getMass();
                 acc[i].second += fy / particles[i]->getMass();
@@ -156,17 +164,7 @@ public:
             }
         }
 
-        for (size_t i = 0; i < particles.size(); ++i) {
-            auto vel = particles[i]->getVelocity();
-            double vx = vel.getX() + acc[i].first * dt;
-            double vy = vel.getY() + acc[i].second * dt;
-
-            double px = particles[i]->getPosition().getX() + vx * dt;
-            double py = particles[i]->getPosition().getY() + vy * dt;
-
-            particles[i]->setVelocity(Vector2D(vx, vy));
-            particles[i]->setPosition(Vector2D(px, py));
-        }
+        return acc;
     }
 
     void clearParticles() {

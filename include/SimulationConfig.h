@@ -12,7 +12,8 @@ struct SimulationConfig {
     static inline float particleGravity = 100.0;
     static inline float GravityRadius = 20.0;
     static inline int windowWidth = 1920;
-    static inline int windowHeight = 960;
+    static inline int windowHeight = 760;
+    static inline float particleSurfaceFriction = 0.92;
 
     static inline bool paused = false;
 

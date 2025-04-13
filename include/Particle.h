@@ -84,16 +84,18 @@ public:
         if (position.getY()==getRadius()) {
             velocity.setX(velocity.getX()*SimulationConfig::GroundFriction);
         }
-        else velocity.setX(velocity.getX()*SimulationConfig::AirFriction);
+        if (position.getY()!=0)
+            velocity.setY(velocity.getY()-SimulationConfig::gravity*deltaTime);
 
+        velocity.setX(velocity.getX()*SimulationConfig::AirFriction);
         velocity.setY(velocity.getY()*SimulationConfig::AirFriction);
 
         position.setX(std::clamp(getPosition().getX(), getRadius(), SimulationConfig::windowWidth - getRadius()));
         position.setY(std::clamp(getPosition().getY(), getRadius(), SimulationConfig::windowHeight - getRadius()));
 
-        if (position.getY()!=0)
-            velocity.setY(velocity.getY()-SimulationConfig::gravity*deltaTime);
-        if (std::abs(velocity.getX()) < 1.0) velocity.setX(0);
+
+        if (std::abs(velocity.getX()) < 0.01) velocity.setX(0);
+        if (std::abs(velocity.getY()) < 0.01) velocity.setY(0);
         position.setX(position.getX()+velocity.getX()*deltaTime);
         position.setY(position.getY()+velocity.getY()*deltaTime);
     }
@@ -110,25 +112,37 @@ public:
     collisionDir.normalize();
 
 
-    double v1 = velocity.getX() * collisionDir.getX() + velocity.getY() * collisionDir.getY();
-    double v2 = other.velocity.getX() * collisionDir.getX() + other.velocity.getY() * collisionDir.getY();
+    const double v1 = velocity.getX() * collisionDir.getX() + velocity.getY() * collisionDir.getY();
+    const double v2 = other.velocity.getX() * collisionDir.getX() + other.velocity.getY() * collisionDir.getY();
 
 
 
-    double newV1 = SimulationConfig::elasticity * (v1 * (mass - other.mass) + 2 * other.mass * v2) / (mass + other.mass);
-    double newV2 = SimulationConfig::elasticity * (v2 * (other.mass - mass) + 2 * mass * v1) / (mass + other.mass);
+    const double newV1 =(v1 * (mass - other.mass) + 2 * other.mass * v2) / (mass + other.mass);
+    const double newV2 =(v2 * (other.mass - mass) + 2 * mass * v1) / (mass + other.mass);
 
 
-    velocity.setX(velocity.getX() + (newV1 - v1) * collisionDir.getX());
-    velocity.setY(velocity.getY() + (newV1 - v1) * collisionDir.getY());
+    velocity.setX(SimulationConfig::elasticity*(velocity.getX() + (newV1 - v1) * collisionDir.getX()));
+    velocity.setY(SimulationConfig::elasticity*(velocity.getY() + (newV1 - v1) * collisionDir.getY()));
 
-    other.velocity.setX(other.velocity.getX() + (newV2 - v2) * collisionDir.getX());
-    other.velocity.setY(other.velocity.getY() + (newV2 - v2) * collisionDir.getY());
+    other.velocity.setX(SimulationConfig::elasticity*(other.velocity.getX() + (newV2 - v2) * collisionDir.getX()));
+    other.velocity.setY(SimulationConfig::elasticity*(other.velocity.getY() + (newV2 - v2) * collisionDir.getY()));
 
+    Vector2D tangent(-collisionDir.getY(), collisionDir.getX());
+
+    double v1t = velocity.getX() * tangent.getX() + velocity.getY() * tangent.getY();
+    double v2t = other.velocity.getX() * tangent.getX() + other.velocity.getY() * tangent.getY();
+
+
+    double deltaVt = (v2t - v1t) * SimulationConfig::particleSurfaceFriction;
+
+    velocity.setX(velocity.getX() + tangent.getX() * deltaVt * 0.5);
+    velocity.setY(velocity.getY() + tangent.getY() * deltaVt * 0.5);
+    other.velocity.setX(other.velocity.getX() - tangent.getX() * deltaVt * 0.5);
+    other.velocity.setY(other.velocity.getY() - tangent.getY() * deltaVt * 0.5);
 
     double overlap = (radius + other.radius) - distance;
     if (overlap > 0) {
-        double moveAmount = 1.1*overlap/2;
+        double moveAmount = 1.001*overlap/2;
 
         position.setX(position.getX() - collisionDir.getX() * moveAmount);
         position.setY(position.getY() - collisionDir.getY() * moveAmount);
