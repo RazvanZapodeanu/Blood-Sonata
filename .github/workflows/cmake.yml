@@ -59,11 +59,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            libx11-dev \
             libxrandr-dev \
             libxcursor-dev \
             libxi-dev \
             libgl1-mesa-dev \
-            libudev-dev
+            libudev-dev \
+            libvorbis-dev \
+            libogg-dev
         
       
 
@@ -142,11 +145,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            libx11-dev \
             libxrandr-dev \
             libxcursor-dev \
             libxi-dev \
             libgl1-mesa-dev \
-            libudev-dev
+            libudev-dev \
+            libvorbis-dev \
+            libogg-dev
 
       - name: Set timestamp, zip name, repo visibility
         env:
