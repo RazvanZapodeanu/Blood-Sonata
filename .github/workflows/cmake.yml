@@ -19,7 +19,7 @@ on:
 
 env:
   BUILD_TYPE: ${{ inputs.build_type || 'Debug' }}
-  EXECUTABLE_NAME: "oop"
+  EXECUTABLE_NAME: "Aether"
   INPUT_FILENAME: "tastatura.txt"
   BIN_DIR: "bin"
   BUILD_DIR: "build"
