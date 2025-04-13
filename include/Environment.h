@@ -51,8 +51,8 @@ public:
         double randomRadius = rand() % 11 + 5;
         Vector2D randomPosition;
         do{
-            randomPosition.setX(std::round(static_cast<float>(rand())/RAND_MAX*SimulationConfig::windowWidth)*100/100.0f);
-            randomPosition.setY(std::round(static_cast<float>(rand())/RAND_MAX*SimulationConfig::windowHeight)*100/100.0f);
+            randomPosition.setX(std::round(static_cast<float>(rand())/static_cast<float>(RAND_MAX)*SimulationConfig::windowWidth));
+            randomPosition.setY(std::round(static_cast<float>(rand())/static_cast<float>(RAND_MAX)*SimulationConfig::windowHeight));
         }while (isOverlapping(randomPosition,randomRadius));
         Vector2D randomVelocity(rand() % 200 - 100, rand() % 200 - 100);
 

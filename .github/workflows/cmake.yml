@@ -59,7 +59,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            build-essential \
+             build-essential \
             xorg-dev \
             libsfml-dev \
             libx11-dev \
@@ -72,7 +72,19 @@ jobs:
             libudev-dev \
             libvorbis-dev \
             libogg-dev \
-            libflac-dev
+            libflac-dev \
+            libx11-xcb-dev \
+            libxcb-render0-dev \
+            libxcb-render-util0-dev \
+            libxcb-xkb-dev \
+            libxcb-icccm4-dev \
+            libxcb-image0-dev \
+            libxcb-keysyms1-dev \
+            libxcb-randr0-dev \
+            libxcb-shape0-dev \
+            libxcb-sync-dev \
+            libxcb-xfixes0-dev \
+            libxcb-xinerama0-dev
         
       
 
@@ -151,7 +163,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            build-essential \
+             build-essential \
             xorg-dev \
             libsfml-dev \
             libx11-dev \
@@ -164,7 +176,19 @@ jobs:
             libudev-dev \
             libvorbis-dev \
             libogg-dev \
-            libflac-dev
+            libflac-dev \
+            libx11-xcb-dev \
+            libxcb-render0-dev \
+            libxcb-render-util0-dev \
+            libxcb-xkb-dev \
+            libxcb-icccm4-dev \
+            libxcb-image0-dev \
+            libxcb-keysyms1-dev \
+            libxcb-randr0-dev \
+            libxcb-shape0-dev \
+            libxcb-sync-dev \
+            libxcb-xfixes0-dev \
+            libxcb-xinerama0-dev
 
       - name: Set timestamp, zip name, repo visibility
         env:
