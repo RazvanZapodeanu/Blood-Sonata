@@ -58,15 +58,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            libx11-dev \
-            libxrandr-dev \
-            libxcursor-dev \
-            libxi-dev \
-            libgl1-mesa-dev \
-            libudev-dev \
-            libvorbis-dev \
-            libogg-dev
+          sudo apt-get install -y libsfml-dev
         
       
 
@@ -144,15 +136,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            libx11-dev \
-            libxrandr-dev \
-            libxcursor-dev \
-            libxi-dev \
-            libgl1-mesa-dev \
-            libudev-dev \
-            libvorbis-dev \
-            libogg-dev
+          sudo apt-get install -y libsfml-dev
 
       - name: Set timestamp, zip name, repo visibility
         env:
