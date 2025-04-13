@@ -9,8 +9,9 @@ int main() {
     ResourceManager::load();
     constexpr int FileNumberToLoad=1;
     Simulation sim(SimulationConfig::windowWidth, SimulationConfig::windowHeight, SimulationConfig::deltaTime);
-    sf::RenderWindow window(sf::VideoMode(sf::Vector2u(SimulationConfig::windowWidth, SimulationConfig::windowHeight)),"Particles");
-    window.setFramerateLimit(SimulationConfig::targetFPS);
+    sf::RenderWindow window(sf::VideoMode(static_cast<unsigned int>(SimulationConfig::windowWidth), 
+                                         static_cast<unsigned int>(SimulationConfig::windowHeight)), "Particles");
+    window.setFramerateLimit(static_cast<unsigned int>(SimulationConfig::targetFPS));
     if (!ImGui::SFML::Init(window)) {
         std::cerr << "ImGui::SFML::Init failed!\n";
         return -1;
@@ -93,7 +94,9 @@ int main() {
             sf::CircleShape shape(static_cast<float>(particle->getRadius()));
             shape.setPosition(sf::Vector2f(static_cast<float>(particle->getPosition().getX()-particle->getRadius()),
                 static_cast<float>(SimulationConfig::windowHeight-particle->getPosition().getY()-particle->getRadius())));
-            shape.setFillColor(sf::Color(particle->getRed(),particle->getGreen(),particle->getBlue()));
+            shape.setFillColor(sf::Color(static_cast<uint8_t>(particle->getRed()),
+                                       static_cast<uint8_t>(particle->getGreen()),
+                                       static_cast<uint8_t>(particle->getBlue())));
             window.draw(shape);
 
         }
@@ -101,7 +104,7 @@ int main() {
         ImGui::SFML::Render(window);
         window.display();
         float dt = deltaClock.getElapsedTime().asSeconds();
-        while (dt < 1.0f / SimulationConfig::targetFPS) {
+        while (dt < 1.0f / static_cast<float>(SimulationConfig::targetFPS)) {
             dt = deltaClock.getElapsedTime().asSeconds();
         }
         deltaClock.restart();

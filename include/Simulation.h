@@ -12,8 +12,8 @@ private:
 public:
 
 
-    explicit Simulation(double width = 100.0, double height = 100.0, double timeStep = 0.1)
-        : environment(width, height), time(0.0), timeStep(timeStep) {}
+    explicit Simulation(double simWidth = 100.0, double simHeight = 100.0, double simTimeStep = 0.1)
+        : environment(simWidth, simHeight), time(0.0), timeStep(simTimeStep) {}
 
 
     Simulation(const Simulation& other)

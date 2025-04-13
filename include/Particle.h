@@ -18,16 +18,15 @@ private:
     Vector2D velocity;
     int red,green,blue;
 public:
-    Particle (std::string name,
-        const double mass,
-        const double radius,
-        const Vector2D& position = Vector2D(),
-        const Vector2D& velocity =  Vector2D(),
-        const int red=0, const int green=0, const int blue=0)
-            :
-    name(std::move(name)),
-    mass(mass), radius(radius),
-    position(position), velocity(velocity), red(red), green(green), blue(blue) {
+    Particle (std::string particleName,
+        const double particleMass,
+        const double particleRadius,
+        const Vector2D& particlePosition = Vector2D(),
+        const Vector2D& particleVelocity = Vector2D(),
+        const int particleRed=0, const int particleGreen=0, const int particleBlue=0)
+        : name(particleName), mass(particleMass), radius(particleRadius),
+          position(particlePosition), velocity(particleVelocity),
+          red(particleRed), green(particleGreen), blue(particleBlue) {
         id=nextId;
     }
     Particle (const Particle& other) :

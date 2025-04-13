@@ -11,8 +11,8 @@ struct SimulationConfig {
     static inline float AirFriction = 0.99f;
     static inline float particleGravity = 100.0f;
     static inline float GravityRadius = 20.0f;
-    static inline int windowWidth = 1920;
-    static inline int windowHeight = 760;
+    static inline unsigned int windowWidth = 1920;
+    static inline unsigned int windowHeight = 760;
     static inline float particleSurfaceFriction = 0.92f;
 
     static inline bool paused = false;

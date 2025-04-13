@@ -8,7 +8,7 @@ private:
     double x;
     double y;
 public:
-    explicit Vector2D(double x=0.0, double y=0.0) : x(x), y(y) {}
+    explicit Vector2D(double xVal=0.0, double yVal=0.0) : x(xVal), y(yVal) {}
 
     Vector2D(const Vector2D& other) : x(other.x), y(other.y) {}
 

@@ -9,8 +9,8 @@ private:
     double height;
     std::vector<std::shared_ptr<Particle>> particles;
 public:
-    explicit Environment(const double width=100.0, const double height=100.0)
-        :width(width), height(height) {}
+    explicit Environment(const double envWidth=100.0, const double envHeight=100.0)
+        :width(envWidth), height(envHeight) {}
     Environment(const Environment& other)
         :width(other.width), height(other.height) {
         for (const auto& p:other.particles) {
@@ -51,8 +51,8 @@ public:
         double randomRadius = rand() % 11 + 5;
         Vector2D randomPosition;
         do{
-            randomPosition.setX(std::round(static_cast<float>(rand())/static_cast<float>(RAND_MAX)*SimulationConfig::windowWidth));
-            randomPosition.setY(std::round(static_cast<float>(rand())/static_cast<float>(RAND_MAX)*SimulationConfig::windowHeight));
+            randomPosition.setX(std::round(static_cast<float>(rand())/static_cast<float>(RAND_MAX)*static_cast<float>(SimulationConfig::windowWidth)));
+            randomPosition.setY(std::round(static_cast<float>(rand())/static_cast<float>(RAND_MAX)*static_cast<float>(SimulationConfig::windowHeight)));
         }while (isOverlapping(randomPosition,randomRadius));
         Vector2D randomVelocity(rand() % 200 - 100, rand() % 200 - 100);
 

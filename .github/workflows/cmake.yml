@@ -60,6 +60,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y \
             build-essential \
+            build-essential \
             xorg-dev \
             libsfml-dev \
             libx11-dev \
@@ -76,7 +77,18 @@ jobs:
             libogg-dev \
             libflac-dev \
             libudev-dev \
-            xvfb
+            xvfb \
+            libxcb1-dev \
+            libxcb-randr0-dev \
+            libxcb-xfixes0-dev \
+            libxcb-cursor-dev \
+            libxcb-keysyms1-dev \
+            libxcb-icccm4-dev \
+            libxcb-image0-dev \
+            libxcb-render-util0-dev \
+            libxcb-xkb-dev \
+            libxkbcommon-dev \
+            libxkbcommon-x11-dev
 
       - name: Setup Xvfb
         if: runner.os == 'Linux'
@@ -177,7 +189,18 @@ jobs:
             libogg-dev \
             libflac-dev \
             libudev-dev \
-            xvfb
+            xvfb \
+            libxcb1-dev \
+            libxcb-randr0-dev \
+            libxcb-xfixes0-dev \
+            libxcb-cursor-dev \
+            libxcb-keysyms1-dev \
+            libxcb-icccm4-dev \
+            libxcb-image0-dev \
+            libxcb-render-util0-dev \
+            libxcb-xkb-dev \
+            libxkbcommon-dev \
+            libxkbcommon-x11-dev
 
       - name: Setup Xvfb
         if: runner.os == 'Linux'
