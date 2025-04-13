@@ -1,7 +1,7 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
-#if defined(__GNUC__) || defined(__clang__)
+#if (defined(__GNUC__) && !defined(__APPLE__)) || defined(__clang__)
     #include <bits/algorithmfwd.h>
 #else
     #include <algorithm>

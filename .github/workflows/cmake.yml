@@ -62,7 +62,9 @@ jobs:
             libxrandr-dev \
             libxcursor-dev \
             libxi-dev \
-            libgl1-mesa-dev
+            libgl1-mesa-dev \
+            libudev-dev
+        
       
 
       - name: Run clang-tidy

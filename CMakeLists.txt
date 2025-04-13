@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.5)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error")
+if(MSVC)
+    # Opțiuni pentru MSVC
+    add_compile_options(/W4 /WX)
+else()
+    # Opțiuni pentru GCC/Clang
+    add_compile_options(-Wall -Wextra -pedantic -Werror)
+endif()
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing executable name in this file
 # for now, the project name is used as the executable name
 set(MAIN_PROJECT_NAME "Aether")
