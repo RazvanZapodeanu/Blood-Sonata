@@ -59,7 +59,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-             build-essential \
+            build-essential \
             xorg-dev \
             libsfml-dev \
             libx11-dev \
@@ -84,8 +84,37 @@ jobs:
             libxcb-shape0-dev \
             libxcb-sync-dev \
             libxcb-xfixes0-dev \
-            libxcb-xinerama0-dev
-        
+            libxcb-xinerama0-dev \
+            libxcb-util0-dev \
+            libxcb-ewmh-dev \
+            libxcb-icccm4-dev \
+            libxcb-image0-dev \
+            libxcb-keysyms1-dev \
+            libxcb-randr0-dev \
+            libxcb-shape0-dev \
+            libxcb-sync-dev \
+            libxcb-xfixes0-dev \
+            libxcb-xinerama0-dev \
+            libxcb-xkb-dev \
+            libxcb-xrm-dev \
+            libxcb-xtest0-dev \
+            libxcb-xv-dev \
+            libxcb-xvmc-dev \
+            libxcb-dri2-0-dev \
+            libxcb-dri3-dev \
+            libxcb-glx0-dev \
+            libxcb-present-dev \
+            libxcb-sync-dev \
+            libxcb-xf86dri-dev \
+            libxcb-xinput-dev \
+            libasound2-dev \
+            libpulse-dev \
+            xvfb
+      - name: Setup Xvfb
+        if: runner.os == 'Linux'
+        run: |
+          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV  
       
 
       - name: Run clang-tidy
@@ -163,7 +192,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-             build-essential \
+            build-essential \
             xorg-dev \
             libsfml-dev \
             libx11-dev \
@@ -188,7 +217,38 @@ jobs:
             libxcb-shape0-dev \
             libxcb-sync-dev \
             libxcb-xfixes0-dev \
-            libxcb-xinerama0-dev
+            libxcb-xinerama0-dev \
+            libxcb-util0-dev \
+            libxcb-ewmh-dev \
+            libxcb-icccm4-dev \
+            libxcb-image0-dev \
+            libxcb-keysyms1-dev \
+            libxcb-randr0-dev \
+            libxcb-shape0-dev \
+            libxcb-sync-dev \
+            libxcb-xfixes0-dev \
+            libxcb-xinerama0-dev \
+            libxcb-xkb-dev \
+            libxcb-xrm-dev \
+            libxcb-xtest0-dev \
+            libxcb-xv-dev \
+            libxcb-xvmc-dev \
+            libxcb-dri2-0-dev \
+            libxcb-dri3-dev \
+            libxcb-glx0-dev \
+            libxcb-present-dev \
+            libxcb-sync-dev \
+            libxcb-xf86dri-dev \
+            libxcb-xinput-dev \
+            libasound2-dev \
+            libpulse-dev \
+            xvfb
+
+      - name: Setup Xvfb
+        if: runner.os == 'Linux'
+        run: |
+          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
 
       - name: Set timestamp, zip name, repo visibility
         env:

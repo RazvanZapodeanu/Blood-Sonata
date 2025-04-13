@@ -71,7 +71,7 @@ public:
         }
         return false;
     }
-    void update(double const dt) {
+    void update(double const dt) const {
         auto accelerations=pullGravity();
         for (size_t i = 0; i < particles.size(); ++i) {
             for (size_t j = i + 1; j < particles.size(); ++j) {
@@ -134,14 +134,14 @@ public:
 
 
     }
-    std::vector<std::pair<double, double>> pullGravity() {
+    std::vector<std::pair<double, double>> pullGravity() const {
         const double G = SimulationConfig::particleGravity;
-        const double softening = 10.0;
 
         std::vector<std::pair<double, double>> acc(particles.size(), {0.0, 0.0});
-
+        constexpr double softening = 10.0;
         for (size_t i = 0; i < particles.size(); ++i) {
             for (size_t j = i + 1; j < particles.size(); ++j) {
+
 
                 const double dx = particles[j]->getPosition().getX() - particles[i]->getPosition().getX();
                 const double dy = particles[j]->getPosition().getY() - particles[i]->getPosition().getY();
