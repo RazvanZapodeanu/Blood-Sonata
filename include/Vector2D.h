@@ -23,8 +23,8 @@ public:
 
     [[nodiscard]] double getX() const { return x; }
     [[nodiscard]] double getY() const { return y; }
-    void setX(double x) { this->x=x; }
-    void setY(double y) { this->y=y; }
+    void setX(double newX) { this->x=newX; }
+    void setY(double newY) { this->y=newY; }
 
     [[nodiscard]] double magnitude() const {
         return std::sqrt(x*x + y*y);
