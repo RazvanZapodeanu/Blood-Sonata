@@ -55,6 +55,28 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            xorg-dev \
+            libsfml-dev \
+            libasound2-dev \
+            libpulse-dev \
+            libvorbis-dev \
+            libogg-dev \
+            libflac-dev \
+            libudev-dev \
+            xvfb \
+            libstdc++-12-dev \
+            g++-12
+
+      - name: Set C++ compiler
+        run: |
+          export CXX=g++-12
+          export CC=gcc-12
+
       - name: Install X11 + OpenGL (Linux only)
         if: runner.os == 'Linux'
         run: |
@@ -210,6 +232,28 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            xorg-dev \
+            libsfml-dev \
+            libasound2-dev \
+            libpulse-dev \
+            libvorbis-dev \
+            libogg-dev \
+            libflac-dev \
+            libudev-dev \
+            xvfb \
+            libstdc++-12-dev \
+            g++-12
+
+      - name: Set C++ compiler
+        run: |
+          export CXX=g++-12
+          export CC=gcc-12
 
       - name: Install X11 + OpenGL (Linux only)
         if: runner.os == 'Linux'
