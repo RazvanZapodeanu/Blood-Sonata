@@ -96,29 +96,15 @@ jobs:
             libxcb-glx0-dev \
             libxcb-shape0-dev \
             libxcb-xinput-dev \
-            libxcb-xfixes0-dev \
-            libxcb-render0-dev \
-            libxcb-shm0-dev \
             libxcb-util0-dev \
             libxcb-xinerama0-dev \
-            libxcb-xkb-dev \
-            libxcb-xtest0-dev \
-            libxcb-xv-dev \
-            libxcb-xvmc-dev \
-            libxcb-icccm4-dev \
             libxcb-ewmh-dev \
-            libxcb-util-dev \
             libxcb-composite0-dev \
             libxcb-damage0-dev \
             libxcb-record0-dev \
             libxcb-res0-dev \
             libxcb-screensaver0-dev \
-            libxcb-xevie-dev \
-            libxcb-xf86dri-dev \
-            libxcb-xprint-dev \
-            libxcb-xtest0-dev \
-            libxcb-xv-dev \
-            libxcb-xvmc-dev
+            libxcb-xevie-dev
 
       - name: Setup Xvfb
         if: runner.os == 'Linux'
@@ -239,29 +225,15 @@ jobs:
             libxcb-glx0-dev \
             libxcb-shape0-dev \
             libxcb-xinput-dev \
-            libxcb-xfixes0-dev \
-            libxcb-render0-dev \
-            libxcb-shm0-dev \
             libxcb-util0-dev \
             libxcb-xinerama0-dev \
-            libxcb-xkb-dev \
-            libxcb-xtest0-dev \
-            libxcb-xv-dev \
-            libxcb-xvmc-dev \
-            libxcb-icccm4-dev \
             libxcb-ewmh-dev \
-            libxcb-util-dev \
             libxcb-composite0-dev \
             libxcb-damage0-dev \
             libxcb-record0-dev \
             libxcb-res0-dev \
             libxcb-screensaver0-dev \
-            libxcb-xevie-dev \
-            libxcb-xf86dri-dev \
-            libxcb-xprint-dev \
-            libxcb-xtest0-dev \
-            libxcb-xv-dev \
-            libxcb-xvmc-dev
+            libxcb-xevie-dev
 
       - name: Setup Xvfb
         if: runner.os == 'Linux'

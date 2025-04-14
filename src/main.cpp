@@ -10,7 +10,8 @@ int main() {
     constexpr int FileNumberToLoad=1;
     Simulation sim(SimulationConfig::windowWidth, SimulationConfig::windowHeight, SimulationConfig::deltaTime);
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(SimulationConfig::windowWidth, SimulationConfig::windowHeight)),"Particles");
-    window.setFramerateLimit(SimulationConfig::targetFPS);
+    window.setFramerateLimit(static_cast<unsigned int>(SimulationConfig::targetFPS));
+
     window.setFramerateLimit(static_cast<unsigned int>(SimulationConfig::targetFPS));
     if (!ImGui::SFML::Init(window)) {
         std::cerr << "ImGui::SFML::Init failed!\n";
