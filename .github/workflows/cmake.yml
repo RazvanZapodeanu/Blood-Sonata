@@ -104,7 +104,7 @@ jobs:
             libxcb-record0-dev \
             libxcb-res0-dev \
             libxcb-screensaver0-dev \
-            libxcb-xevie-dev
+            
 
       - name: Setup Xvfb
         if: runner.os == 'Linux'
@@ -233,7 +233,7 @@ jobs:
             libxcb-record0-dev \
             libxcb-res0-dev \
             libxcb-screensaver0-dev \
-            libxcb-xevie-dev
+            
 
       - name: Setup Xvfb
         if: runner.os == 'Linux'
