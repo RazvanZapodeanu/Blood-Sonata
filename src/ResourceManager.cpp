@@ -2,13 +2,13 @@
 #include <iostream>
 
 void ResourceManager::load() {
-    if (!spawnBuffer.loadFromFile("../assets/sounds/spawnParticle.wav"))
+    if (!spawnBuffer.loadFromFile("assets/sounds/spawnParticle.wav"))
         std::cerr << "Failed to load spawn sound\n";
-    if (!hitBuffer.loadFromFile("../assets/sounds/collisionSound.wav"))
+    if (!hitBuffer.loadFromFile("assets/sounds/collisionSound.wav"))
         std::cerr << "Failed to load hit sound\n";
-    if (!background.loadFromFile("../assets/images/background.jpg"))
+    if (!background.loadFromFile("assets/images/background.jpg"))
         std::cerr << "Failed to load background image\n";
-    if (!music.openFromFile("../assets/sounds/ambience.ogg"))
+    if (!music.openFromFile("assets/sounds/ambience.ogg"))
         std::cerr << "Failed to load ambient music\n";
 
     spawnSound = std::make_unique<sf::Sound>(spawnBuffer);

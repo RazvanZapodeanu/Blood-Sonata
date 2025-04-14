@@ -4,20 +4,28 @@ cmake_minimum_required(VERSION 3.5)
 # for now, the project name is used as the executable name
 set(MAIN_PROJECT_NAME "Aether")
 set(MAIN_EXECUTABLE_NAME "${MAIN_PROJECT_NAME}")
-
+option(USE_SFML "Enable SFML support" ON)
 
 project(${MAIN_PROJECT_NAME})
 # set(CMAKE_PROJECT_VERSION_MAJOR 0)
 # set(CMAKE_PROJECT_VERSION_MINOR 0)
 # set(CMAKE_PROJECT_VERSION_PATCH 1)
 
+
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++")
+endif()
+
 include(cmake/Options.cmake)
 include(cmake/CompilerFlags.cmake)
 include(cmake/CopyHelper.cmake)
+
+
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 ###############################################################################
@@ -97,6 +105,10 @@ set_compiler_flags(RUN_SANITIZERS TRUE TARGET_NAMES ${MAIN_EXECUTABLE_NAME})
 # where ${FOO} and ${BAR} represent additional executables or libraries
 # you want to compile with the set compiler flags
 
+if(USE_SFML)
+    set_compiler_flags(RUN_SANITIZERS FALSE TARGET_NAMES ${MAIN_EXECUTABLE_NAME})
+endif()
+
 ###############################################################################
 
 # use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
@@ -156,3 +168,6 @@ copy_files(FILES tastatura.txt COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     add_definitions(-DUSING_GNU)
 endif()
+
+copy_files(DIRECTORY assets/sounds assets/images
+            COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
