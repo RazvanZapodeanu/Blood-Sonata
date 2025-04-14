@@ -18,7 +18,7 @@ private:
     Vector2D velocity;
     int red,green,blue;
 public:
-    Particle (std::string particleName,
+    Particle (const std::string &particleName,
         const double particleMass,
         const double particleRadius,
         const Vector2D& particlePosition = Vector2D(),

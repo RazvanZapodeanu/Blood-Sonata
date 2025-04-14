@@ -25,6 +25,7 @@ env:
   BUILD_DIR: "build"
   EXT_DIR: "ext"
   GEN_DIR: "generated"
+  SFML_VERSION: "2024-12-21-3.0.0"
 
 defaults:
   run:

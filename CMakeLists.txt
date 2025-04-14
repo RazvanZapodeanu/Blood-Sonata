@@ -39,6 +39,7 @@ include(FetchContent)
 # )
 #
 # FetchContent_MakeAvailable(SomeLib)
+set(WARNINGS_AS_ERRORS OFF)
 FetchContent_Declare(SFML
         GIT_REPOSITORY https://github.com/SFML/SFML.git
         GIT_TAG 3.0.0
@@ -67,7 +68,11 @@ FetchContent_Declare(
 
 # external dependencies with find_package
 
-# find_package(Threads REQUIRED)
+find_package(Threads REQUIRED)
+if(APPLE)
+elseif(UNIX)
+    find_package(X11)
+endif()
 
 ###############################################################################
 
@@ -106,6 +111,7 @@ target_link_libraries(${MAIN_EXECUTABLE_NAME}
         SFML::Window
         SFML::System
         SFML::Audio
+        SFML::System Threads::Threads
 )
 target_link_libraries(${MAIN_EXECUTABLE_NAME}
         PRIVATE
@@ -129,6 +135,11 @@ option(IMGUI_SFML_FIND_SFML "Use find_package to find SFML" OFF)
 option(IMGUI_SFML_IMGUI_DEMO "Build imgui_demo.cpp" ON)
 
 FetchContent_MakeAvailable(imgui-sfml)
+
+if(APPLE)
+elseif(UNIX)
+    target_link_libraries(${MAIN_EXECUTABLE_NAME} PRIVATE X11)
+endif()
 ###############################################################################
 
 # copy binaries to "bin" folder; these are uploaded as artifacts on each release
