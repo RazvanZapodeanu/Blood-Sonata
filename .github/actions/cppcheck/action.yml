@@ -25,7 +25,9 @@ runs:
           libxcursor-dev \
           libxi-dev \
           libgl1-mesa-dev \
-          libudev-dev
+          libudev-dev \
+          libvorbis-dev \
+          libogg-dev
 
     - name: Cache cppcheck
       uses: actions/cache/restore@v4
