@@ -20,7 +20,10 @@ runs:
           libxcb-randr0 \
           libxcb-render-util0 \
           libxcb-xinerama0 \
-          libxcb-xfixes0
+          libxcb-xfixes0 \
+          libxrandr-dev \
+          libxcursor-dev \
+          libxi-dev
 
     - name: Setup compiler env vars
       shell: bash
