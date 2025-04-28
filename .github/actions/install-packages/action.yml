@@ -7,7 +7,7 @@ runs:
     # Common Linux dependencies
     - name: Install common Linux Dependencies
       if: runner.os == 'Linux'
-      uses: ./.github/actions/install-linux-deps
+      uses: ./actions/install-linux-deps
 
     - name: More Linux Dependencies
       shell: bash
