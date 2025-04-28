@@ -50,6 +50,7 @@ public:
             red=other.red;
             green=other.green;
             blue=other.blue;
+            id=other.id;
         }
         return *this;
     }

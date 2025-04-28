@@ -11,7 +11,3 @@ cppcheck --enable=all \
     --suppress=useStlAlgorithm \
     --check-level=exhaustive \
     --error-exitcode=1
-if [ $? -ne 0 ]; then
-  echo "Cppcheck failed. Check the output above for details."
-  exit 1
-fi
