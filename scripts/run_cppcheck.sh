@@ -10,4 +10,11 @@ cppcheck --enable=all \
     --suppress=unmatchedSuppression \
     --suppress=useStlAlgorithm \
     --check-level=exhaustive \
-    --error-exitcode=1
+    --error-exitcode=1 \
+    2> cppcheck_results.xml || true
+if grep -q "<error " cppcheck_results.xml; then
+    echo "Cppcheck found issues. See cppcheck_results.xml for details."
+    exit 1
+else
+    echo "Cppcheck completed successfully with no errors."
+fi
