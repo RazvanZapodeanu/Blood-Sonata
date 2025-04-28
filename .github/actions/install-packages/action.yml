@@ -23,7 +23,8 @@ runs:
           libxcb-xfixes0 \
           libxrandr-dev \
           libxcursor-dev \
-          libxi-dev
+          libxi-dev \
+          libgl1-mesa-dev
 
         # https://github.com/llvm/llvm-project/issues/78354
         sudo sysctl vm.mmap_rnd_bits=28

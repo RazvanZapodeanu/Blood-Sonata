@@ -23,7 +23,8 @@ runs:
           libxcb-xfixes0 \
           libxrandr-dev \
           libxcursor-dev \
-          libxi-dev
+          libxi-dev \
+          libgl1-mesa-dev
 
     - name: Setup compiler env vars
       shell: bash

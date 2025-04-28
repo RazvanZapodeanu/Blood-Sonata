@@ -23,7 +23,8 @@ runs:
           libxcb-xfixes0 \
           libxrandr-dev \
           libxcursor-dev \
-          libxi-dev
+          libxi-dev \
+          libgl1-mesa-dev
 
     - name: Cache cppcheck
       uses: actions/cache/restore@v4
