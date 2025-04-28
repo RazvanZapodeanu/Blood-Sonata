@@ -27,7 +27,8 @@ runs:
           libgl1-mesa-dev \
           libudev-dev \
           libvorbis-dev \
-          libogg-dev
+          libogg-dev \
+          libflac-dev
 
     - name: Setup compiler env vars
       shell: bash
