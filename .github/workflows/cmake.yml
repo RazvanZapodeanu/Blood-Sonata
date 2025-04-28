@@ -177,6 +177,8 @@ jobs:
         run: |
           xcode-select --install || true
           sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+          brew update
+          brew install sfml libiconv
 
       - name: Set timestamp and zip name
         run: |
