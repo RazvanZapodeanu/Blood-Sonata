@@ -2,8 +2,8 @@
 #include "../include/ResourceManager.h"
 #include "../include/SimulationConfig.h"
 #include <iostream>
-#include "imgui.h"
-#include "imgui-SFML.h"
+#include <imgui.h>
+#include <imgui-SFML.h>
 
 int main() {
     ResourceManager::load();

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BOBONETE.iml" filepath="$PROJECT_DIR$/.idea/BOBONETE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/oop-template-sfml3.0-resurse-locale.iml" filepath="$PROJECT_DIR$/.idea/oop-template-sfml3.0-resurse-locale.iml" />
     </modules>
   </component>
 </project>

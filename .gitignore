@@ -84,7 +84,6 @@ install_dir/
 
 # CMake
 cmake-build-*/
-cmake-mingw-build
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml

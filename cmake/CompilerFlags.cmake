@@ -29,13 +29,21 @@ function(set_compiler_flags)
         if(MSVC)
             target_compile_options(${TARGET_NAME} PRIVATE /W4 /permissive- /wd4244 /wd4267 /wd4996 /external:anglebrackets /external:W0 /utf-8 /MP)
         else()
-            target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -Werror=conversion -Werror=sign-conversion)
+            target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -pedantic)
         endif()
 
         ###############################################################################
 
         # sanitizers
         if("${ARG_RUN_SANITIZERS}" STREQUAL "TRUE")
+            if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
+            else()
+                set_custom_stdlib_and_sanitizers(sfml-system false)
+                set_custom_stdlib_and_sanitizers(sfml-window false)
+                set_custom_stdlib_and_sanitizers(sfml-graphics false)
+                set_custom_stdlib_and_sanitizers(sfml-audio false)
+            endif()
+
             set_custom_stdlib_and_sanitizers(${TARGET_NAME} true)
         endif ()
     endforeach ()
