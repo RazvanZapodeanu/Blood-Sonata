@@ -20,8 +20,6 @@ public:
         : environment(other.environment), time(other.time), timeStep(other.timeStep) {}
 
 
-
-
     ~Simulation() = default;
 
 
@@ -32,9 +30,12 @@ public:
 
     void setTimeStep(double newTimeStep) { timeStep = newTimeStep; }
 
+
     void setDetlaTime(float deltatime) {
         timeStep=deltatime;
     }
+
+
     void addParticle(const Particle& particle) {
         environment.addParticle(particle);
     }
@@ -46,18 +47,20 @@ public:
         time += timeStep;
     }
 
+
     void run(int steps) {
         for (int i = 0; i < steps; ++i) {
             step();
         }
     }
 
+
     int loadFileData(int index = -1) {
         std::string filename;
         if (index == -1) {
-            filename = "../Data/InputData.txt";
+            filename = "./Data/InputData.txt";
         } else {
-            filename = "../Data/InputData" + std::to_string(index) + ".txt";
+            filename = "./Data/InputData" + std::to_string(index) + ".txt";
         }
 
         std::ifstream file(filename);
@@ -75,10 +78,13 @@ public:
             return 0;
         }
     }
+
+
     void reset(const int fileNumber) {
         environment.clearParticles();
         loadFileData(fileNumber);
     }
+
 
     friend std::ostream& operator<<(std::ostream& os, const Simulation& sim) {
         os << "Simulation State:\n";

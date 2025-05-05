@@ -161,5 +161,5 @@ copy_files(FILES tastatura.txt COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE
 
 
 
-copy_files(DIRECTORY assets/sounds assets/images
+copy_files(DIRECTORY assets Data
             COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})

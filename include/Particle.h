@@ -29,6 +29,8 @@ public:
           red(particleRed), green(particleGreen), blue(particleBlue) {
         id=nextId;
     }
+
+
     Particle (const Particle& other) :
     id(nextId++),
     name(other.name),
@@ -39,6 +41,7 @@ public:
     red(other.red),
     green(other.green),
     blue(other.blue) {}
+
 
     Particle& operator=(const Particle& other) {
         if (this!=&other) {
@@ -54,6 +57,8 @@ public:
         }
         return *this;
     }
+
+
     virtual ~Particle() = default;
 
     [[nodiscard]] int getId() const { return id; }
@@ -66,6 +71,7 @@ public:
     [[nodiscard]] int getGreen() const { return green;}
     [[nodiscard]] int getBlue() const { return blue;}
 
+
     void setName(const std::string& newName){name=newName;}
     void setMass(double newMass){mass=newMass;}
     void setRadius(double newRadius){radius=newRadius;}
@@ -75,6 +81,7 @@ public:
     void setVelocity(const Vector2D& newVelocity) {
         velocity=newVelocity;
     }
+
 
     virtual void update(double deltaTime) {
         if (position.getY()==getRadius()) {
@@ -96,57 +103,56 @@ public:
         position.setY(position.getY()+velocity.getY()*deltaTime);
     }
 
+
     void handleCollision(Particle& other) {
 
-    double dx = other.position.getX() - position.getX();
-    double dy = other.position.getY() - position.getY();
-    double distance = std::sqrt(dx * dx + dy * dy);
+        double dx = other.position.getX() - position.getX();
+        double dy = other.position.getY() - position.getY();
+        double distance = std::sqrt(dx * dx + dy * dy);
 
-    if (distance < 1e-6) return;
+        if (distance < 1e-6) return;
 
-    Vector2D collisionDir(dx, dy);
-    collisionDir.normalize();
-
-
-    const double v1 = velocity.getX() * collisionDir.getX() + velocity.getY() * collisionDir.getY();
-    const double v2 = other.velocity.getX() * collisionDir.getX() + other.velocity.getY() * collisionDir.getY();
+        Vector2D collisionDir(dx, dy);
+        collisionDir.normalize();
 
 
-
-    const double newV1 =(v1 * (mass - other.mass) + 2 * other.mass * v2) / (mass + other.mass);
-    const double newV2 =(v2 * (other.mass - mass) + 2 * mass * v1) / (mass + other.mass);
-
-
-    velocity.setX(SimulationConfig::elasticity*(velocity.getX() + (newV1 - v1) * collisionDir.getX()));
-    velocity.setY(SimulationConfig::elasticity*(velocity.getY() + (newV1 - v1) * collisionDir.getY()));
-
-    other.velocity.setX(SimulationConfig::elasticity*(other.velocity.getX() + (newV2 - v2) * collisionDir.getX()));
-    other.velocity.setY(SimulationConfig::elasticity*(other.velocity.getY() + (newV2 - v2) * collisionDir.getY()));
-
-    Vector2D tangent(-collisionDir.getY(), collisionDir.getX());
-
-    double v1t = velocity.getX() * tangent.getX() + velocity.getY() * tangent.getY();
-    double v2t = other.velocity.getX() * tangent.getX() + other.velocity.getY() * tangent.getY();
+        const double v1 = velocity.getX() * collisionDir.getX() + velocity.getY() * collisionDir.getY();
+        const double v2 = other.velocity.getX() * collisionDir.getX() + other.velocity.getY() * collisionDir.getY();
 
 
-    double deltaVt = (v2t - v1t) * SimulationConfig::particleSurfaceFriction;
 
-    velocity.setX(velocity.getX() + tangent.getX() * deltaVt * 0.5);
-    velocity.setY(velocity.getY() + tangent.getY() * deltaVt * 0.5);
-    other.velocity.setX(other.velocity.getX() - tangent.getX() * deltaVt * 0.5);
-    other.velocity.setY(other.velocity.getY() - tangent.getY() * deltaVt * 0.5);
-
-    double overlap = (radius + other.radius) - distance;
-    if (overlap > 0) {
-        double moveAmount = 1.001*overlap/2;
-
-        position.setX(position.getX() - collisionDir.getX() * moveAmount);
-        position.setY(position.getY() - collisionDir.getY() * moveAmount);
-        other.position.setX(other.position.getX() + collisionDir.getX() * moveAmount);
-        other.position.setY(other.position.getY() + collisionDir.getY() * moveAmount);
-    }
+        const double newV1 =(v1 * (mass - other.mass) + 2 * other.mass * v2) / (mass + other.mass);
+        const double newV2 =(v2 * (other.mass - mass) + 2 * mass * v1) / (mass + other.mass);
 
 
+        velocity.setX(SimulationConfig::elasticity*(velocity.getX() + (newV1 - v1) * collisionDir.getX()));
+        velocity.setY(SimulationConfig::elasticity*(velocity.getY() + (newV1 - v1) * collisionDir.getY()));
+
+        other.velocity.setX(SimulationConfig::elasticity*(other.velocity.getX() + (newV2 - v2) * collisionDir.getX()));
+        other.velocity.setY(SimulationConfig::elasticity*(other.velocity.getY() + (newV2 - v2) * collisionDir.getY()));
+
+        Vector2D tangent(-collisionDir.getY(), collisionDir.getX());
+
+        double v1t = velocity.getX() * tangent.getX() + velocity.getY() * tangent.getY();
+        double v2t = other.velocity.getX() * tangent.getX() + other.velocity.getY() * tangent.getY();
+
+
+        double deltaVt = (v2t - v1t) * SimulationConfig::particleSurfaceFriction;
+
+        velocity.setX(velocity.getX() + tangent.getX() * deltaVt * 0.5);
+        velocity.setY(velocity.getY() + tangent.getY() * deltaVt * 0.5);
+        other.velocity.setX(other.velocity.getX() - tangent.getX() * deltaVt * 0.5);
+        other.velocity.setY(other.velocity.getY() - tangent.getY() * deltaVt * 0.5);
+
+        double overlap = (radius + other.radius) - distance;
+        if (overlap > 0) {
+            double moveAmount = 1.001*overlap/2;
+
+            position.setX(position.getX() - collisionDir.getX() * moveAmount);
+            position.setY(position.getY() - collisionDir.getY() * moveAmount);
+            other.position.setX(other.position.getX() + collisionDir.getX() * moveAmount);
+            other.position.setY(other.position.getY() + collisionDir.getY() * moveAmount);
+        }
 }
 
 
@@ -157,6 +163,7 @@ public:
         return distance <= (radius + other.radius)*1.01;
     }
 
+
     friend std::ostream& operator<<(std::ostream& os, const Particle& p) {
         os << "Particle #" << p.id << " \"" << p.name << "\"\n";
         os << "  Mass: " << p.mass << "\n";
@@ -166,7 +173,5 @@ public:
         os << "  Color: (" << p.red << ", " << p.green << ", " << p.blue << ")\n";
         return os;
     }
-
-
 };
 #endif

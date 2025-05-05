@@ -11,12 +11,15 @@ private:
 public:
     explicit Environment(const double envWidth=100.0, const double envHeight=100.0)
         :width(envWidth), height(envHeight) {}
+
+
     Environment(const Environment& other)
         :width(other.width), height(other.height) {
         for (const auto& p:other.particles) {
             particles.push_back(std::make_shared<Particle>(*p));
         }
     }
+
 
     Environment& operator=(const Environment& other) {
         if (this!=&other) {
@@ -32,11 +35,14 @@ public:
         return *this;
     }
 
+
     ~Environment() = default;
+
 
     [[nodiscard]] double getWidth() const { return width; }
     [[nodiscard]] double getHeight() const { return height; }
     [[nodiscard]] const std::vector<std::shared_ptr<Particle>>& getParticles() const { return particles; }
+
 
     void setWidth(double newWidth) { width = newWidth; }
     void setHeight(double newHeight) { height = newHeight; }
@@ -45,6 +51,8 @@ public:
     void addParticle(const Particle& particle) {
         particles.push_back(std::make_shared<Particle>(particle));
     }
+
+
     [[nodiscard]] Particle generateParticle() const {
         std::string randomName = "Particle_" + std::to_string(rand() % 1000);
         double randomMass = rand() % 100 + 1;
@@ -61,6 +69,7 @@ public:
             rand()%256, rand()%256, rand()%256};
     }
 
+
     [[nodiscard]] bool isOverlapping(const Vector2D& newPosition, const double& newRadius) const {
         for (const auto& particle:particles) {
             double dx=newPosition.getX()-particle->getPosition().getX();
@@ -71,6 +80,8 @@ public:
         }
         return false;
     }
+
+
     void update(double const dt) const {
         auto accelerations=pullGravity();
         for (size_t i = 0; i < particles.size(); ++i) {
@@ -126,14 +137,10 @@ public:
                 p->setPosition(Vector2D(pos.getX(), height - r));
                 p->setVelocity(Vector2D(vel.getX(), -vel.getY()*SimulationConfig::elasticity));
             }
-
-
-
         }
-
-
-
     }
+
+
     std::vector<std::pair<double, double>> pullGravity() const {
         const double G = SimulationConfig::particleGravity;
 
@@ -167,9 +174,12 @@ public:
         return acc;
     }
 
+
     void clearParticles() {
         particles.clear();
     }
+
+
     friend std::ostream& operator<<(std::ostream& os, const Environment& env) {
         os << "Environment:\n";
         os << "  Width: " << env.width << "\n";
@@ -182,7 +192,6 @@ public:
         }
         return os;
     }
-
 };
 
 
