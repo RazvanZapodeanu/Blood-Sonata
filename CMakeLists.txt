@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing executable name in this file
 # for now, the project name is used as the executable name
-set(MAIN_PROJECT_NAME "Aether")
+set(MAIN_PROJECT_NAME "BloodSonata")
 set(MAIN_EXECUTABLE_NAME "${MAIN_PROJECT_NAME}")
 
 project(${MAIN_PROJECT_NAME})
@@ -51,21 +51,6 @@ FetchContent_Declare(SFML
         SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-FetchContent_Declare(
-        imgui
-        URL "https://github.com/ocornut/imgui/archive/v1.91.9b.zip"
-        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
-
-FetchContent_Declare(
-        imgui-sfml
-        GIT_REPOSITORY https://github.com/SFML/imgui-sfml.git
-        GIT_TAG 5e8f8fb857c8f3cff1096bf3e4402c64e3bcf6af
-        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
-
-
-
 ###############################################################################
 
 # external dependencies with find_package
@@ -80,15 +65,42 @@ endif()
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 add_executable(${MAIN_EXECUTABLE_NAME}
-        src/main.cpp
+
     generated/src/Helper.cpp
-        include/Particle.h
-        include/Vector2D.h
-        include/Simulation.h
-        include/Environment.h
+        include/Game.h
+        include/Entity.h
+        include/Player.h
+        include/Enemy.h
+        include/Animation.h
+        include/HealthBar.h
+        include/InputManager.h
         include/ResourceManager.h
+        include/SoundManager.h
+        include/EffectManager.h
+        include/Camera.h
+        include/UIManager.h
+        include/Button.h
+        include/Spawner.h
+        include/Utils.h
+        include/templates/Pool.h
+        src/Game.cpp
+        src/Entity.cpp
+        src/Player.cpp
+        src/Enemy.cpp
+        src/Animation.cpp
+        src/HealthBar.cpp
+        src/InputManager.cpp
         src/ResourceManager.cpp
-        include/SimulationConfig.h
+        src/SoundManager.cpp
+        src/EffectManager.cpp
+        src/Camera.cpp
+        src/UIManager.cpp
+        src/Button.cpp
+        src/Spawner.cpp
+        src/templates/Pool.cpp
+        main.cpp
+        include/exceptions/GameException.h
+
 )
 
 
@@ -119,28 +131,12 @@ target_link_libraries(${MAIN_EXECUTABLE_NAME}
         SFML::Audio
         SFML::System Threads::Threads
 )
-target_link_libraries(${MAIN_EXECUTABLE_NAME}
-        PRIVATE
-        ImGui-SFML::ImGui-SFML
-)
-add_custom_command(TARGET ${MAIN_EXECUTABLE_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        $<TARGET_FILE:SFML::Graphics>
-        $<TARGET_FILE:SFML::Window>
-        $<TARGET_FILE:SFML::System>
-        $<TARGET_FILE:SFML::Audio>
-        $<TARGET_FILE_DIR:${MAIN_EXECUTABLE_NAME}> )
 
 
-# Dear ImGui
-FetchContent_MakeAvailable(imgui)
 
-# ImGui-SFML
-set(IMGUI_DIR ${imgui_SOURCE_DIR})
-option(IMGUI_SFML_FIND_SFML "Use find_package to find SFML" OFF)
-option(IMGUI_SFML_IMGUI_DEMO "Build imgui_demo.cpp" ON)
 
-FetchContent_MakeAvailable(imgui-sfml)
+
+
 
 if(APPLE)
 elseif(UNIX)
@@ -161,5 +157,5 @@ copy_files(FILES tastatura.txt COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE
 
 
 
-copy_files(DIRECTORY assets Data
-            COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
+copy_files(DIRECTORY assets
+        COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})

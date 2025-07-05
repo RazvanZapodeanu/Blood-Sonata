@@ -1,24 +1,80 @@
 #include "../include/ResourceManager.h"
 #include <iostream>
+#include <stdexcept>
 
-void ResourceManager::load() {
-    if (!spawnBuffer.loadFromFile("assets/sounds/spawnParticle.wav"))
-        std::cerr << "Failed to load spawn sound\n";
-    if (!hitBuffer.loadFromFile("assets/sounds/collisionSound.wav"))
-        std::cerr << "Failed to load hit sound\n";
-    if (!background.loadFromFile("assets/images/background.jpg"))
-        std::cerr << "Failed to load background image\n";
-    if (!music.openFromFile("assets/sounds/ambience.ogg"))
-        std::cerr << "Failed to load ambient music\n";
-
-    spawnSound = std::make_unique<sf::Sound>(spawnBuffer);
-    hitSound = std::make_unique<sf::Sound>(hitBuffer);
-    music.setLooping(true);
-    music.setVolume(20);
-    music.play();
-    spawnSound->setVolume(20);
+ResourceManager& ResourceManager::getInstance() {
+    static ResourceManager instance;
+    return instance;
 }
-sf::Sound& ResourceManager::getSpawnSound()   { return *spawnSound; }
-sf::Sound& ResourceManager::getHitSound()     { return *hitSound;   }
-sf::Music& ResourceManager::getMusic()        { return music;      }
-sf::Texture& ResourceManager::getBackground() { return background; }
+
+ResourceManager::ResourceManager() {
+}
+
+ResourceManager::~ResourceManager() {
+
+}
+
+void ResourceManager::loadTexture(const std::string& id, const std::string& filePath) {
+
+    if (m_textures.find(id) != m_textures.end()) {
+        std::cout << "Texture " << id << " already exists in manager" << std::endl;
+        return;
+    }
+    
+
+    auto texture = std::make_unique<sf::Texture>();
+    
+
+    if (!texture->loadFromFile(filePath)) {
+        throw std::runtime_error("Couldn't load texture: " + filePath);
+    }
+    
+
+    m_textures[id] = std::move(texture);
+}
+
+void ResourceManager::loadFont(const std::string& id, const std::string& filePath) {
+
+    if (m_fonts.find(id) != m_fonts.end()) {
+        std::cout << "Font " << id << " already exists in manager" << std::endl;
+        return;
+    }
+    
+
+    auto font = std::make_unique<sf::Font>();
+    
+
+    if (!font->openFromFile(filePath)) {
+        throw std::runtime_error("Couldn't load font: " + filePath);
+    }
+    
+
+    m_fonts[id] = std::move(font);
+}
+
+sf::Texture& ResourceManager::getTexture(const std::string& id) {
+
+    auto it = m_textures.find(id);
+    if (it == m_textures.end()) {
+        throw std::runtime_error("Texture " + id + " doesn't exist in manager");
+    }
+    
+    return *it->second;
+}
+
+sf::Font& ResourceManager::getFont(const std::string& id) {
+
+    auto it = m_fonts.find(id);
+    if (it == m_fonts.end()) {
+        throw std::runtime_error("Font " + id + " doesn't exist in manager");
+    }
+    
+    return *it->second;
+}
+
+std::ostream& operator<<(std::ostream& os, const ResourceManager& resourceManager) {
+    os << "ResourceManager: textures=" << resourceManager.m_textures.size()
+       << ", fonts=" << resourceManager.m_fonts.size();
+    
+    return os;
+}
