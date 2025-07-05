@@ -4,46 +4,45 @@
 
 # Blood Sonata
 
-**Blood Sonata** is a feature-complete 2D fighting game built with modern C++ and SFML, developed as a university project.  
-Experience intense combat with intelligent AI, dynamic animations, and polished game mechanics.
+**Blood Sonata** is a 2D fighting game built with C++ and SFML as a university project.  
+Features real-time combat, AI opponents, and a complete game engine architecture.
 
 ---
 
-## ⚡ Key Features
+## Features
 
-- **Advanced Combat System** — Multi-hit combos, aerial attacks, and frame-based animations
-- **Smart AI Opponents** — Adaptive enemies with decision trees, attack patterns, and defensive strategies
-- **Complete Audio System** — Dynamic sound effects, background music, and spatial audio
-- **Visual Effects Engine** — Particle systems, impact effects, and smooth camera following
-- **Professional Game Architecture** — State management, resource pooling, and modular design
+- **Combat System** — Multiple attack types with frame-based animations
+- **AI Opponents** — Enemies with movement, attack patterns, and defensive behavior
+- **Audio Engine** — Sound effects, background music, and audio management
+- **Visual Effects** — Particle systems for impacts and combat feedback
+- **Game Architecture** — Complete state management and resource handling
 
 ---
 
-## 🛠 Technologies
+## Technologies
 
 - C++17 with modern practices
-- SFML 3.0 (Graphics, Audio, Input)
-- Template-based object pooling
-- Singleton pattern for managers
-- Event-driven input system
+- SFML 3.0 for graphics and audio
 - Custom animation framework
+- Object pooling for performance optimization
+- Modular component architecture
 
 ---
 
-## 🎮 Gameplay
+## Gameplay
 
-Fight through endless waves of AI enemies in fast-paced 2D combat. Master punch/kick combos, perfect your parry timing, and use aerial attacks to dominate increasingly challenging opponents.
+Real-time 2D combat where players fight AI-controlled enemies. Combat includes punch/kick combinations, aerial attacks, and defensive parrying mechanics.
 
-**Controls:** `WASD` (Move) • `J/K/L` (Combat) • `F` (Parry) • `S` (Spawn Enemy)
-
----
-
-## 🏗 Architecture
-
-Complete game engine with **ResourceManager**, **SoundManager**, **EffectManager**, **InputManager**, **UIManager**, and **Camera** systems. Features entity inheritance, animation state machines, and optimized rendering pipeline.
+**Controls:** `WASD` movement • `J/K/L` combat • `F` parry • `S` enemy spawn
 
 ---
 
-## 🚧 Status
+## Implementation
 
-**Feature Complete** — Fully playable with all core systems implemented. Currently fine-tuning AI balance and combat mechanics.
+Built with separate manager systems for resources, audio, effects, input, and UI. Uses entity inheritance, animation state machines, and event-driven input handling.
+
+---
+
+## Status
+
+**Complete** — All core systems implemented and functional. Ongoing refinements to AI behavior and combat balance.
