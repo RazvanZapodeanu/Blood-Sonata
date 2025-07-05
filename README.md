@@ -21,7 +21,7 @@ Features real-time combat, AI opponents, and a complete game engine architecture
 
 ## Technologies
 
-- C++17 with modern practices
+- C++17
 - SFML 3.0 for graphics and audio
 - Custom animation framework
 - Object pooling for performance optimization
