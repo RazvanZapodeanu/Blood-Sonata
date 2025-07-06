@@ -81,7 +81,6 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         include/UIManager.h
         include/Button.h
         include/Spawner.h
-        include/Utils.h
         include/templates/Pool.h
         src/Game.cpp
         src/Entity.cpp

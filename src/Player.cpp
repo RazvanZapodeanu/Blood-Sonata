@@ -343,7 +343,7 @@ void Player::updateAnimation() {
     }
 
 
-    static std::string lastAnimation = "";
+    static std::string lastAnimation{};
     if (newAnimation != lastAnimation) {
         std::cout << "FORCING ANIMATION CHANGE: " << lastAnimation << " -> " << newAnimation << std::endl;
         setAnimation(newAnimation);

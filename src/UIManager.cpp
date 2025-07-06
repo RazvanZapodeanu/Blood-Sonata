@@ -1,7 +1,6 @@
 #include "../include/UIManager.h"
 #include "../include/Game.h"
 #include "../include/ResourceManager.h"
-#include "../include/SoundManager.h"
 #include <iostream>
 
 UIManager::UIManager(sf::RenderWindow& window)

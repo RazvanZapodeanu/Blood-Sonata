@@ -64,7 +64,7 @@ sf::Vector2f Camera::clampPosition(const sf::Vector2f& position) const {
     float x = std::max(m_bounds.position.x + halfViewWidth, std::min(position.x, m_bounds.position.x + m_bounds.size.x - halfViewWidth));
     float y = std::max(m_bounds.position.y + halfViewHeight, std::min(position.y, m_bounds.position.y + m_bounds.size.y - halfViewHeight));
     
-    return sf::Vector2f(x, y);
+    return {x, y};
 }
 
 std::ostream& operator<<(std::ostream& os, const Camera& camera) {
