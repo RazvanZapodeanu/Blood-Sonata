@@ -107,13 +107,14 @@ private:
 
     sf::Texture m_backgroundTexture;
     sf::Sprite m_backgroundSprite;
+    bool m_debugMode;
 
 
     float m_gameOverTimer;
     static constexpr float GAME_OVER_DELAY = 3.0f;
 
 
-    bool m_debugMode;
+
 };
 
 #endif
