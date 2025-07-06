@@ -5,8 +5,8 @@
 
 
 Effect::Effect(const std::string& texturePath, const sf::Vector2f& position, float duration, bool loop)
-    : m_position(position)
-    , m_sprite(m_texture)
+    : m_sprite(m_texture)
+    , m_position(position)
     , m_duration(duration)
     , m_currentTime(0.0f)
     , m_loop(loop)

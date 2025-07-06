@@ -87,7 +87,7 @@ void UIManager::initializeGameOverMenu() {
              });
 }
 
-void UIManager::update(float deltaTime) {
+void UIManager::update(float /* deltaTime */) {
 
     sf::Vector2i mousePosition = sf::Mouse::getPosition(m_window);
     
