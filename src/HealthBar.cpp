@@ -21,12 +21,13 @@ HealthBar::HealthBar(float maxHealth, const sf::Vector2f& position, const sf::Ve
 }
 
 HealthBar::HealthBar(const HealthBar& other)
-    : m_maxHealth(other.m_maxHealth)
+    : m_background(other.m_background)
+    , m_foreground(other.m_foreground)
+    ,m_maxHealth(other.m_maxHealth)
     , m_currentHealth(other.m_currentHealth)
     , m_position(other.m_position)
     , m_size(other.m_size)
-    , m_background(other.m_background)
-    , m_foreground(other.m_foreground)
+
 {
 }
 

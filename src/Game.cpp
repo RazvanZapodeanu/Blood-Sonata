@@ -10,9 +10,10 @@ Game& Game::getInstance() {
 Game::Game()
     : m_gameState(GameState::MENU)
     , m_enemyPool(10)
-    , m_gameOverTimer(0.0f)
     , m_debugMode(false)
     , m_backgroundSprite(m_backgroundTexture)
+    , m_gameOverTimer(0.0f)
+
 {
 }
 

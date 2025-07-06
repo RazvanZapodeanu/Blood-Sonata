@@ -19,12 +19,13 @@ Animation::Animation(const std::vector<std::string>& framePaths, float frameDura
 }
 
 Animation::Animation(const Animation& other)
-    : m_frameDuration(other.m_frameDuration)
+    : m_frameTextures(other.m_frameTextures)
+    ,m_frameDuration(other.m_frameDuration)
     , m_totalTime(other.m_totalTime)
     , m_currentFrame(other.m_currentFrame)
     , m_frameCount(other.m_frameCount)
     , m_isLooping(other.m_isLooping)
-    , m_frameTextures(other.m_frameTextures)
+
 {
 }
 
