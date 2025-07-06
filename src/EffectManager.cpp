@@ -197,8 +197,8 @@ std::ostream& operator<<(std::ostream& os, const Effect& effect) {
 // Implementare pentru clasa EffectManager
 
 EffectManager& EffectManager::getInstance() {
-    static EffectManager instance;
-    return instance;
+    static EffectManager manager;
+    return manager;
 }
 
 EffectManager::EffectManager()
