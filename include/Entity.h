@@ -70,9 +70,9 @@ protected:
     void initializeAnimation(const std::string& texturePath);
 
 
-
-    sf::Sprite m_sprite;
     sf::Texture m_texture;
+    sf::Sprite m_sprite;
+
     
 
     sf::Vector2f m_position;

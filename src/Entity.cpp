@@ -21,25 +21,21 @@ Entity::Entity(const std::string& texturePath, float posX, float posY, float wid
 }
 
 Entity::Entity(const Entity& other)
-    : m_sprite(m_texture)
-, m_position(other.m_position)
-      , m_size(other.m_size)
-      , m_velocity(other.m_velocity)
-      , m_isAlive(other.m_isAlive)
-      , m_isParrying(other.m_isParrying)
-      , m_isAttacking(other.m_isAttacking)
-      , m_isJumping(other.m_isJumping)
-      , m_health(other.m_health)
-      , m_maxHealth(other.m_maxHealth)
-      , m_facingRight(other.m_facingRight) {
-
-    m_texture = other.m_texture;
-    m_sprite = other.m_sprite;
-    m_sprite.setTexture(m_texture);
+    : m_texture(other.m_texture)      // PRIMUL - copiază textura
+    , m_sprite(m_texture)             // AL DOILEA - acum poate folosi textura
+    , m_position(other.m_position)
+    , m_size(other.m_size)
+    , m_velocity(other.m_velocity)
+    , m_isAlive(other.m_isAlive)
+    , m_isParrying(other.m_isParrying)
+    , m_isAttacking(other.m_isAttacking)
+    , m_isJumping(other.m_isJumping)
+    , m_health(other.m_health)
+    , m_maxHealth(other.m_maxHealth)
+    , m_facingRight(other.m_facingRight) {
 
 
     m_healthBar = std::make_unique<HealthBar>(*other.m_healthBar);
-
 
     if (other.m_currentAnimation) {
         m_currentAnimation = std::make_unique<Animation>(*other.m_currentAnimation);

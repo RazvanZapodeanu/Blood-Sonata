@@ -185,7 +185,7 @@ void Enemy::update(float deltaTime) {
     }
 }
 
-void Enemy::updateAI(float deltaTime) {
+void Enemy::updateAI(float /*deltaTime*/) {
 
     if (!m_target || !m_target->isAlive()) {
         return;

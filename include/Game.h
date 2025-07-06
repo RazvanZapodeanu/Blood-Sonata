@@ -71,7 +71,6 @@ private:
     void checkCollisions();
 
 
-    void checkAttacks();
 
 
     void initializeWindow();
@@ -105,8 +104,9 @@ private:
     std::unique_ptr<UIManager> m_uiManager;
 
 
-    sf::Sprite m_backgroundSprite;
+
     sf::Texture m_backgroundTexture;
+    sf::Sprite m_backgroundSprite;
 
 
     float m_gameOverTimer;
