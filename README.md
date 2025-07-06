@@ -5,7 +5,7 @@
 # Blood Sonata
 
 **Blood Sonata** is a 2D fighting game built with C++ and SFML as a university project.  
-Features real-time combat, AI opponents, and a complete game engine architecture.
+Features combat mechanics, AI opponents, and organized game architecture.
 
 ---
 
@@ -13,9 +13,9 @@ Features real-time combat, AI opponents, and a complete game engine architecture
 
 - **Combat System** — Multiple attack types with frame-based animations
 - **AI Opponents** — Enemies with movement, attack patterns, and defensive behavior
-- **Audio Engine** — Sound effects, background music, and audio management
-- **Visual Effects** — Particle systems for impacts and combat feedback
-- **Game Architecture** — Complete state management and resource handling
+- **Audio System** — Sound effects, background music, and audio management
+- **Visual Feedback** — Simple effects for impacts and combat interactions
+- **Game Architecture** — State management and resource handling
 
 ---
 
@@ -31,7 +31,7 @@ Features real-time combat, AI opponents, and a complete game engine architecture
 
 ## Gameplay
 
-Real-time 2D combat where players fight AI-controlled enemies. Combat includes punch/kick combinations, aerial attacks, and defensive parrying mechanics.
+2D combat where players fight AI-controlled enemies. Combat includes punch/kick combinations, aerial attacks, and defensive parrying mechanics.
 
 **Controls:** `WASD` movement • `J/K/L` combat • `F` parry • `S` enemy spawn
 
@@ -45,4 +45,4 @@ Built with separate manager systems for resources, audio, effects, input, and UI
 
 ## Status
 
-**Complete** — All core systems implemented and functional. Ongoing refinements to AI behavior and combat balance.
+**Functional** — All core systems implemented and working. Ongoing refinements to AI behavior and combat balance.
