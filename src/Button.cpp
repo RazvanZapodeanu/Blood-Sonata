@@ -5,8 +5,9 @@
 Button::Button(const std::string& text, const sf::Vector2f& position, 
                const sf::Vector2f& size, const sf::Font& font, 
                const std::function<void()>& callback)
-    : m_callback(callback)
+    : m_shape()
     , m_text(font,text,24)
+    , m_callback(callback)
     , m_idleColor(sf::Color(100, 100, 100))
     , m_hoverColor(sf::Color(150, 150, 150))
     , m_pressColor(sf::Color(50, 50, 50))
